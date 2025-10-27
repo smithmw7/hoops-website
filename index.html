@@ -23,6 +23,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
@@ -155,6 +156,70 @@
                 transform: scale(1);
             }
         }
+        
+        /* Footer Styles */
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+            backdrop-filter: blur(10px);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ff6b35;
+        }
+        
+        .footer-company {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ff6b35;
+        }
+        
+        .footer-copyright {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-links {
+                gap: 1rem;
+            }
+            
+            .footer-links a {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -206,5 +271,21 @@
             triggerBasketballAnimation();
         });
     </script>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">Hightop Hoops</div>
+            <div class="footer-company">Developed by Hightop Games LLC</div>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="support.html">Support</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 Hightop Games LLC. All rights reserved.
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
