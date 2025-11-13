@@ -313,9 +313,9 @@
                 <form id="support-form" action="https://formsubmit.co/51e738fe96e51bdc192b49114b5bc513" method="POST">
                     <!-- FormSubmit Configuration -->
                     <input type="hidden" name="_subject" value="New Support Request - High Top Hoops">
-                    <input type="hidden" name="_next" value="https://hightopgames.com/support.html?success=true">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_next" value="">
                     
                     <div class="form-group">
                         <label for="name">Name *</label>
@@ -374,12 +374,46 @@
     </footer>
     
     <script>
-        // Show success message if redirected from FormSubmit
-        if (window.location.search.includes('success=true')) {
-            document.getElementById('success-message').style.display = 'block';
-            // Scroll to the form
-            document.querySelector('.contact-form').scrollIntoView({ behavior: 'smooth' });
-        }
+        // Handle form submission via AJAX to stay on domain
+        document.getElementById('support-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const submitBtn = form.querySelector('.submit-btn');
+            const successMessage = document.getElementById('success-message');
+            
+            // Disable submit button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Reset form
+                    form.reset();
+                    
+                    // Reset button
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Support Request';
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                // Show error message
+                alert('Sorry, there was an error sending your support request. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Support Request';
+            }
+        });
     </script>
 </body>
 </html>
