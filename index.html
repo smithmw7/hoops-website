@@ -17,6 +17,10 @@
             box-sizing: border-box;
         }
         
+        html, body {
+            overscroll-behavior-y: none;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             background: url('assets/images/back.jpg') center/cover no-repeat;
@@ -35,10 +39,16 @@
             z-index: 2;
             max-width: 800px;
             padding: 2rem;
+            /* Ensure content pushes footer down */
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         
         .logo-container {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
         
         .logo-image {
@@ -47,11 +57,25 @@
             height: auto;
             filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
         }
+
+        .shoe-container {
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shoe-image {
+            max-width: 350px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
+            transform: rotate(-15deg);
+        }
         
         .basketball-container {
             position: relative;
             display: inline-block;
-            margin-top: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
         }
         
         .basketball {
@@ -76,7 +100,8 @@
         }
         
         .download-section {
-            margin-top: 4rem;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
         }
         
         .download-button {
@@ -108,6 +133,10 @@
             .logo-image {
                 max-width: 300px;
             }
+
+            .shoe-image {
+                max-width: 280px;
+            }
             
             .basketball {
                 width: 150px;
@@ -123,10 +152,15 @@
         @media (max-width: 480px) {
             .splash-container {
                 padding: 1rem;
+                min-height: 90vh; /* Push footer off fold on mobile */
             }
             
             .logo-image {
                 max-width: 250px;
+            }
+
+            .shoe-image {
+                max-width: 240px;
             }
             
             .basketball {
@@ -226,6 +260,10 @@
     <div class="splash-container">
         <div class="logo-container">
             <img src="assets/images/Logo_Hightop.png" alt="Hightop Hoops Logo" class="logo-image">
+        </div>
+
+        <div class="shoe-container">
+            <img src="assets/images/shoe.png" alt="Hightop Shoe" class="shoe-image">
         </div>
         
         <div class="basketball-container">
