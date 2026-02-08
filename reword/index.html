@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Daily Reword — Your NEW daily word puzzle. Swap tiles, make words, one challenge every day." />
+  <title>Daily Reword — Daily Word Puzzle</title>
+  <link rel="icon" type="image/png" href="Assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #cde1f9;
+      --bg-soft: #e1efff;
+      --tile-top: #E1EFFF;
+      --tile-edge: #CFE1FF;
+      --text: #0f172a;
+      --text-muted: #334155;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --radius: 24px;
+      --radius-sm: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0 0 clamp(24px, 5vw, 48px) 0;
+    }
+
+    /* Hero: letter tiles + wordmark */
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: clamp(24px, 5vw, 48px) clamp(24px, 5vw, 48px) 0;
+      width: 100%;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      margin-left: -50vw;
+      width: 100vw;
+      top: 0;
+      bottom: 0;
+      background: #c5daf7;
+      z-index: -1;
+    }
+
+    .tiles {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: clamp(28px, 5vw, 48px);
+      flex-wrap: nowrap;
+    }
+
+    .tile-wrap {
+      position: relative;
+      flex-shrink: 0;
+      filter: drop-shadow(0 12px 28px rgba(15, 23, 42, 0.22)) drop-shadow(0 4px 14px rgba(15, 23, 42, 0.15));
+    }
+
+    .tile-wrap:first-child {
+      z-index: 2;
+      margin-right: -36px;
+    }
+
+    .tile-wrap:last-child {
+      z-index: 1;
+    }
+
+    .tile-wrap img.tile-main {
+      display: block;
+      width: clamp(120px, 28vw, 200px);
+      height: auto;
+    }
+
+    .tile-wrap img.tile-shadow {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      z-index: -1;
+      transform: translate(4px, 6px);
+      opacity: 0.35;
+    }
+
+    .logo {
+      margin-bottom: clamp(16px, 3vw, 24px);
+      align-self: flex-start;
+    }
+
+    .logo-wordmark {
+      font-size: clamp(3rem, 12vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text);
+      text-align: left;
+    }
+
+    .logo-wordmark .line2 {
+      margin-top: -0.15em;
+      display: block;
+    }
+
+    .tagline {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 600;
+      color: var(--text-muted);
+      max-width: 320px;
+      margin: 0 auto 12px;
+      line-height: 1.45;
+    }
+
+    .rack-section {
+      width: 100%;
+      margin-top: 0;
+      position: relative;
+      z-index: 0;
+      background: linear-gradient(to bottom, #c5daf7 0%, #c5daf7 140px, var(--bg) 140px, var(--bg) 100%);
+    }
+
+    .board-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 0 24px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .board-slot {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('Assets/SlotInset.png') center/contain no-repeat;
+      background-size: 100% 100%;
+      font-size: 38px;
+      font-weight: 800;
+      color: #CEE1FF;
+      flex-shrink: 0;
+      transform: translateY(12px);
+    }
+
+    .slot-letter {
+      display: inline-block;
+    }
+
+    .board-row.cascade-in .board-slot {
+      animation: slot-reveal 0.4s ease-out forwards;
+    }
+
+    .board-row.cascade-in .board-slot:nth-child(1) { animation-delay: 0ms; }
+    .board-row.cascade-in .board-slot:nth-child(2) { animation-delay: 80ms; }
+    .board-row.cascade-in .board-slot:nth-child(3) { animation-delay: 160ms; }
+    .board-row.cascade-in .board-slot:nth-child(4) { animation-delay: 240ms; }
+    .board-row.cascade-in .board-slot:nth-child(5) { animation-delay: 320ms; }
+
+    .board-row.reset-letters .board-slot {
+      transform: translateY(12px);
+      animation: none;
+    }
+
+    .board-row.cascade-pop .board-slot {
+      animation: slot-pop 0.5s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+    }
+
+    .board-row.cascade-pop .board-slot:nth-child(1) { animation-delay: 0ms; }
+    .board-row.cascade-pop .board-slot:nth-child(2) { animation-delay: 70ms; }
+    .board-row.cascade-pop .board-slot:nth-child(3) { animation-delay: 140ms; }
+    .board-row.cascade-pop .board-slot:nth-child(4) { animation-delay: 210ms; }
+    .board-row.cascade-pop .board-slot:nth-child(5) { animation-delay: 280ms; }
+
+    .board-row.slots-in-place .board-slot {
+      transform: translateY(0);
+    }
+
+    .board-row.reset-pop .board-slot {
+      transform: translateY(0) scale(0.88);
+      animation: none;
+    }
+
+    @keyframes slot-reveal {
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slot-pop {
+      from {
+        transform: translateY(0) scale(0.88);
+      }
+      to {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .rack-tile.moving {
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 20;
+      position: relative;
+    }
+
+    .rack-tile.landed {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease-out;
+    }
+
+    .rack-tile.rack-tile-reset {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+
+    .rack-tile.rack-tile-in {
+      animation: rack-tile-in 0.5s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+    }
+
+    .rack-tile.rack-tile-in:nth-child(1) { animation-delay: 0ms; }
+    .rack-tile.rack-tile-in:nth-child(2) { animation-delay: 70ms; }
+    .rack-tile.rack-tile-in:nth-child(3) { animation-delay: 140ms; }
+    .rack-tile.rack-tile-in:nth-child(4) { animation-delay: 210ms; }
+    .rack-tile.rack-tile-in:nth-child(5) { animation-delay: 280ms; }
+
+    @keyframes rack-tile-in {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .rack-img {
+      width: 100%;
+      height: 200px;
+      display: block;
+      filter: drop-shadow(0 6px 16px rgba(15, 23, 42, 0.12));
+      object-fit: fill;
+      object-position: center center;
+      mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+      mask-size: 100% 100%;
+      -webkit-mask-size: 100% 100%;
+    }
+
+    .rack-tiles {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: -110px;
+      position: relative;
+      z-index: 1;
+      padding: 0 24px;
+    }
+
+    .rack-tile {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('Assets/tile_rack.png') center/contain no-repeat;
+      background-size: 100% 100%;
+      font-size: 36px;
+      font-weight: 900;
+      color: #76391e;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    footer {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+      margin-top: auto;
+      padding: 32px clamp(24px, 5vw, 48px) 0;
+      border-top: 1px solid rgba(15, 23, 42, 0.08);
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      background: var(--bg);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-copy {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="hero">
+    <div class="tiles">
+      <div class="tile-wrap">
+        <img src="Assets/index-assets/Letter_R_shadow.png" alt="" class="tile-shadow" aria-hidden="true" />
+        <img src="Assets/index-assets/Letter_R.png" alt="Letter R tile" class="tile-main" width="200" height="200" />
+      </div>
+      <div class="tile-wrap">
+        <img src="Assets/index-assets/Letter_W_shadow.png" alt="" class="tile-shadow" aria-hidden="true" />
+        <img src="Assets/index-assets/Letter_W.png" alt="Letter W tile" class="tile-main" width="200" height="200" />
+      </div>
+    </div>
+
+    <div class="logo">
+      <h1 class="logo-wordmark">
+        <span class="line1">Daily</span>
+        <span class="line2">Reword.</span>
+      </h1>
+    </div>
+
+    <p class="tagline">
+      Your NEW daily word puzzle.
+    </p>
+  </main>
+
+  <div class="rack-section">
+    <div class="board-row" id="board-row" aria-hidden="true">
+      <span class="board-slot" id="slot-0"><span class="slot-letter">B</span></span>
+      <span class="board-slot" id="slot-1"><span class="slot-letter">R</span></span>
+      <span class="board-slot" id="slot-2"><span class="slot-letter">A</span></span>
+      <span class="board-slot" id="slot-3"><span class="slot-letter">I</span></span>
+      <span class="board-slot" id="slot-4"><span class="slot-letter">N</span></span>
+    </div>
+    <img src="Assets/Shelf_color.png" alt="" class="rack-img" />
+    <div class="rack-tiles" id="rack-tiles" aria-hidden="true">
+      <span class="rack-tile" id="rack-tile-0" data-letter="C">C</span>
+      <span class="rack-tile" id="rack-tile-1" data-letter="M">M</span>
+      <span class="rack-tile" id="rack-tile-2" data-letter="O">O</span>
+      <span class="rack-tile" id="rack-tile-3" data-letter="P">P</span>
+      <span class="rack-tile" id="rack-tile-4" data-letter="H">H</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var CASCADE_DURATION = 500;
+      var DELAY_BEFORE_MOVE = 700;
+      var MOVE_DURATION = 650;
+      var WAIT_BEFORE_CHAMP = 1200;
+      var WAIT_BEFORE_CHOMP = 1200;
+      var WAIT_AFTER_CHOMP = 1200;
+
+      var boardRow = document.getElementById('board-row');
+      var slots = [
+        document.getElementById('slot-0'),
+        document.getElementById('slot-1'),
+        document.getElementById('slot-2'),
+        document.getElementById('slot-3'),
+        document.getElementById('slot-4')
+      ];
+      var tileC = document.getElementById('rack-tile-0');
+      var tileM = document.getElementById('rack-tile-1');
+      var tileO = document.getElementById('rack-tile-2');
+      var tileP = document.getElementById('rack-tile-3');
+      var tileH = document.getElementById('rack-tile-4');
+      var rackTiles = [tileC, tileM, tileO, tileP, tileH];
+      var wrosd = ['W', 'R', 'O', 'S', 'D'];
+
+      function getCenter(el) {
+        var r = el.getBoundingClientRect();
+        return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+      }
+
+      function runCascade() {
+        boardRow.classList.remove('cascade-in');
+        boardRow.offsetHeight;
+        boardRow.classList.add('cascade-in');
+      }
+
+      function runPopCascade() {
+        boardRow.classList.remove('cascade-pop');
+        boardRow.classList.add('reset-pop');
+        boardRow.offsetHeight;
+        boardRow.classList.remove('reset-pop');
+        boardRow.classList.add('cascade-pop');
+      }
+
+      function flyTilesToSlots(pairs, letters, callback) {
+        var tilesToMove = pairs.map(function(p) { return p.tile; });
+        pairs.forEach(function(p) {
+          var slotCenter = getCenter(p.slot);
+          var tileCenter = getCenter(p.tile);
+          var dx = slotCenter.x - tileCenter.x;
+          var dy = slotCenter.y - tileCenter.y;
+          p.tile.classList.add('moving');
+          p.dx = dx;
+          p.dy = dy;
+        });
+
+        requestAnimationFrame(function() {
+          pairs.forEach(function(p) {
+            p.tile.style.transform = 'translate(' + p.dx + 'px, ' + p.dy + 'px)';
+          });
+        });
+
+        setTimeout(function() {
+          pairs.forEach(function(p) {
+            p.tile.classList.add('landed');
+          });
+          letters.forEach(function(letter, i) {
+            slots[i].querySelector('.slot-letter').textContent = letter;
+          });
+          boardRow.classList.add('slots-in-place');
+          runPopCascade();
+          if (callback) callback();
+        }, MOVE_DURATION);
+      }
+
+      function animateChain() {
+        flyTilesToSlots(
+          [{ tile: tileC, slot: slots[0] }, { tile: tileH, slot: slots[1] }],
+          ['C', 'H', 'A', 'I', 'N'],
+          function() {
+            setTimeout(animateChamp, WAIT_BEFORE_CHAMP);
+          }
+        );
+      }
+
+      function animateChamp() {
+        flyTilesToSlots(
+          [{ tile: tileM, slot: slots[3] }, { tile: tileP, slot: slots[4] }],
+          ['C', 'H', 'A', 'M', 'P'],
+          function() {
+            setTimeout(animateChomp, WAIT_BEFORE_CHOMP);
+          }
+        );
+      }
+
+      function animateChomp() {
+        flyTilesToSlots(
+          [{ tile: tileO, slot: slots[2] }],
+          ['C', 'H', 'O', 'M', 'P'],
+          function() {
+            setTimeout(showDailyAndRack, WAIT_AFTER_CHOMP);
+          }
+        );
+      }
+
+      function showDailyAndRack() {
+        var daily = ['D', 'A', 'I', 'L', 'Y'];
+        daily.forEach(function(letter, i) {
+          slots[i].querySelector('.slot-letter').textContent = letter;
+        });
+        boardRow.classList.add('slots-in-place');
+        runPopCascade();
+
+        rackTiles.forEach(function(tile, i) {
+          tile.classList.remove('landed', 'moving');
+          tile.style.transform = '';
+          tile.textContent = wrosd[i];
+          tile.classList.add('rack-tile-reset');
+        });
+        boardRow.offsetHeight;
+        requestAnimationFrame(function() {
+          rackTiles.forEach(function(tile) {
+            tile.classList.remove('rack-tile-reset');
+            tile.classList.add('rack-tile-in');
+          });
+        });
+      }
+
+      runCascade();
+      setTimeout(animateChain, DELAY_BEFORE_MOVE + CASCADE_DURATION);
+    })();
+  </script>
+
+  <footer>
+    <nav class="footer-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms of Service</a>
+    </nav>
+    <p class="footer-copy">© 2026 Hightop Games LLC. All rights reserved.</p>
+  </footer>
+</body>
+</html>
