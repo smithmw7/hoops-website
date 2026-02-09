@@ -1,322 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hightop Hoops - Download Now</title>
-    <meta name="description"
-        content="Download Hightop Hoops - The ultimate arcade basketball experience. Shoot hoops, unlock characters, and compete for the high score!">
-
-    <!-- Favicon -->
-    <link rel="icon" href="assets/images/favicon.png" type="image/png">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://hightopgames.com/">
-    <meta property="og:title" content="Hightop Hoops - Download Now">
-    <meta property="og:description"
-        content="Download Hightop Hoops - The ultimate arcade basketball experience. Shoot hoops, unlock characters, and compete for the high score!">
-    <meta property="og:image" content="https://hightopgames.com/assets/images/Logo_Hightop.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://hightopgames.com/">
-    <meta property="twitter:title" content="Hightop Hoops - Download Now">
-    <meta property="twitter:description"
-        content="Download Hightop Hoops - The ultimate arcade basketball experience. Shoot hoops, unlock characters, and compete for the high score!">
-    <meta property="twitter:image" content="https://hightopgames.com/assets/images/Logo_Hightop.png">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@300;400;600;700;800;900&display=swap"
-        rel="stylesheet">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overscroll-behavior-y: none;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            height: 100%;
-            font-family: 'Montserrat', sans-serif;
-            background: url('assets/images/back.jpg') center top/cover no-repeat;
-            background-attachment: scroll;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('assets/images/back.jpg') center top/cover no-repeat;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .splash-container {
-            text-align: center;
-            color: white;
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            padding: 2rem;
-            /* Ensure content pushes footer down */
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .logo-container {
-            margin-bottom: 2rem;
-        }
-
-        .logo-image {
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
-        }
-
-        .shoe-container {
-            margin-bottom: 2rem;
-        }
-
-        .shoe-image {
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            25% {
-                transform: translateY(-8px) rotate(1deg);
-            }
-
-            50% {
-                transform: translateY(-15px) rotate(0deg);
-            }
-
-            75% {
-                transform: translateY(-8px) rotate(-1deg);
-            }
-        }
-
-        .download-section {
-            margin-top: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .download-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.2rem;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .download-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
-        }
-
-        .download-button:active {
-            transform: translateY(-1px);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .logo-container {
-                margin-top: 3rem;
-            }
-
-            .logo-image {
-                max-width: 400px;
-            }
-
-            .shoe-image {
-                max-width: 95%;
-                width: 95%;
-            }
-
-            .download-button {
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .splash-container {
-                padding: 1rem;
-                min-height: 90vh;
-                /* Push footer off fold on mobile */
-            }
-
-            .logo-container {
-                margin-top: 4rem;
-                margin-bottom: 2rem;
-            }
-
-            .logo-image {
-                max-width: 350px;
-            }
-
-            .shoe-image {
-                max-width: 100%;
-                width: 100%;
-            }
-
-            .download-button {
-                padding: 0.7rem 1.2rem;
-                font-size: 0.9rem;
-            }
-        }
-
-
-        /* Footer Styles */
-        .footer {
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-            width: 100%;
-            margin-top: auto;
-            backdrop-filter: blur(10px);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-brand {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-
-        .footer-company {
-            font-size: 0.75rem;
-            margin-bottom: 1rem;
-            opacity: 0.7;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            font-weight: 400;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .footer-copyright {
-            font-size: 0.7rem;
-            opacity: 0.5;
-            margin-top: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .footer-links {
-                gap: 1rem;
-            }
-
-            .footer-links a {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hightop Games</title>
+  <meta name="description" content="Hightop Games LLC. Play Daily Reword and more.">
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f5f0e8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .logo-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 0;
+    }
+    .logo-wrap img {
+      max-width: min(320px, 85vw);
+      height: auto;
+      display: block;
+      filter: drop-shadow(6px 8px 16px rgba(180, 168, 155, 0.55));
+    }
+    .legal {
+      flex-shrink: 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #8a8278;
+      margin-top: auto;
+    }
+    .legal a {
+      color: #8a8278;
+      text-decoration: underline;
+    }
+    .legal a:hover { color: #5a534a; }
+  </style>
 </head>
-
 <body>
-    <div class="splash-container">
-        <div class="logo-container">
-            <img src="assets/images/Logo_Hightop.png" alt="Hightop Hoops Logo" class="logo-image">
-        </div>
-
-        <div class="shoe-container">
-            <img src="assets/images/shoe.png" alt="Hightop Shoe" class="shoe-image">
-        </div>
-
-        <div class="download-section">
-            <a href="#" class="download-button" id="download-link">
-                COMING SOON
-            </a>
-        </div>
-    </div>
-
-    <script>
-        // Coming soon button click handler
-        document.getElementById('download-link').addEventListener('click', function (e) {
-            e.preventDefault();
-        });
-    </script>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-brand">Hightop Hoops</div>
-            <div class="footer-company">Developed by Hightop Games LLC</div>
-            <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-                <a href="support.html">Support</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="footer-copyright">
-                © 2025 Hightop Games LLC. All rights reserved.
-            </div>
-        </div>
-    </footer>
+  <div class="logo-wrap">
+    <img src="assets/images/LogoHightopGames.png" alt="Hightop Games" width="320" height="auto" />
+  </div>
+  <footer class="legal">
+    <p>Hightop Games LLC &copy; 2026</p>
+    <p><a href="reword/privacy.html">Privacy Policy</a> &middot; <a href="reword/terms.html">Terms of Service</a></p>
+  </footer>
 </body>
-
 </html>
