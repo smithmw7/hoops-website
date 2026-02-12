@@ -1,21 +1,24 @@
-# Hoops Website
+# Hightop Games Website
 
-Welcome to the Hoops basketball game website!
+Website for hightopgames.com and Hightop Games LLC.
 
-## Getting Started
+## Structure
 
-This is a simple HTML website hosted on GitHub Pages.
+```
+hoops-website/
+├── docs/           # Site content (deployed to GitHub Pages)
+│   ├── assets/
+│   ├── reword/     # Reword game landing
+│   ├── index.html
+│   └── ...
+└── README.md
+```
 
-## Features
+## Deployment (GitHub Pages)
 
-- Responsive design
-- Modern CSS styling
-- Ready for GitHub Pages deployment
+1. **Settings → Pages** in the repo
+2. **Source:** Deploy from a branch
+3. **Branch:** `main` / **Folder:** `/docs`
+4. Push to `main` to publish
 
-## Deployment
-
-This website is configured to work with GitHub Pages. Simply push to the main branch and your site will be automatically deployed.
-
-## Custom Domain
-
-This repository is configured to work with a custom domain. The CNAME file will be set up to point to your domain.
+The site is served from the `docs/` folder so the repo root stays clean for config, tooling, and future build setup.
