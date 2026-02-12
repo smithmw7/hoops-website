@@ -6,7 +6,7 @@ Website for hightopgames.com and Hightop Games LLC.
 
 ```
 hoops-website/
-├── docs/           # Site content (deployed to GitHub Pages)
+├── dist/           # Site content (deployed to GitHub Pages)
 │   ├── assets/
 │   ├── reword/     # Reword game landing
 │   ├── index.html
@@ -18,7 +18,7 @@ hoops-website/
 
 1. **Settings → Pages** in the repo
 2. **Source:** Deploy from a branch
-3. **Branch:** `main` / **Folder:** `/docs`
+3. **Branch:** `main` / **Folder:** `/dist`
 4. Push to `main` to publish
 
-The site is served from the `docs/` folder so the repo root stays clean for config, tooling, and future build setup.
+The site is served from the `dist/` folder so the repo root stays clean for config, tooling, and future build setup.
