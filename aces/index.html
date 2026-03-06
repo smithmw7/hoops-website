@@ -8,14 +8,12 @@
   <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #e8f0e0;
-      --bg-soft: #d4e8c8;
-      --text: #1a2e14;
-      --text-muted: #3d4a36;
-      --accent: #2d6a22;
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.75);
+      --accent: #b0d0ff;
     }
 
     * {
@@ -30,7 +28,7 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
+      background: #0f1629 url('assets/shadow.png') center center / cover no-repeat fixed;
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -46,51 +44,51 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      max-width: 560px;
+      max-width: 640px;
       margin: 0 auto;
-      padding: clamp(48px, 10vw, 80px) clamp(24px, 5vw, 48px) 0;
+      padding: clamp(32px, 8vw, 56px) clamp(24px, 5vw, 48px) clamp(24px, 5vw, 48px);
       width: 100%;
       flex: 1;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      margin-left: -50vw;
-      width: 100vw;
-      top: 0;
-      bottom: 0;
-      background: var(--bg-soft);
-      z-index: -1;
-    }
-
     .logo-wordmark {
-      font-size: clamp(3rem, 14vw, 5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      font-family: 'Arvo', serif;
+      font-size: clamp(2.75rem, 12vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: 0.28em;
       line-height: 1.1;
       color: var(--text);
-      margin-bottom: clamp(16px, 3vw, 24px);
+      text-transform: uppercase;
+      margin-bottom: clamp(20px, 4vw, 32px);
+      text-shadow: 0 0 12px rgba(59, 130, 246, 0.5), 0 2px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .cards-image {
+      width: 100%;
+      max-width: min(420px, 90vw);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
+      margin-bottom: clamp(20px, 4vw, 28px);
     }
 
     .tagline {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-size: clamp(0.95rem, 2.2vw, 1.1rem);
       font-weight: 600;
       color: var(--text-muted);
       max-width: 320px;
-      line-height: 1.45;
+      line-height: 1.5;
     }
 
     footer {
       width: 100%;
-      max-width: 560px;
+      max-width: 640px;
       margin: 0 auto;
       margin-top: auto;
-      padding: 32px clamp(24px, 5vw, 48px) 0;
-      border-top: 1px solid rgba(26, 46, 20, 0.08);
+      padding: 28px clamp(24px, 5vw, 48px) 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       text-align: center;
-      background: var(--bg);
+      background: transparent;
     }
 
     .footer-links {
@@ -122,6 +120,7 @@
 <body>
   <main class="hero">
     <h1 class="logo-wordmark">Aces</h1>
+    <img src="assets/cards.png" alt="Four aces — clubs, diamonds, spades, hearts" class="cards-image" width="420" height="auto" />
     <p class="tagline">Merge cards. Build your deck.</p>
   </main>
 

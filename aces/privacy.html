@@ -11,15 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #e8f0e0;
-      --text: #1a2e14;
-      --text-muted: #3d4a36;
-      --accent: #2d6a22;
+      --bg-dark: #1a2744;
+      --bg-center: #2a3a5c;
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.75);
+      --accent: #b0d0ff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
+      background: radial-gradient(ellipse at center, var(--bg-center) 0%, var(--bg-dark) 70%, #0f1629 100%);
+      background-attachment: fixed;
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -28,7 +30,7 @@
     }
     .top-band {
       position: relative;
-      background: #d4e8c8;
+      background: var(--bg-center);
       padding: clamp(24px, 5vw, 48px) clamp(24px, 5vw, 48px) 24px;
     }
     .top-band::before {
@@ -39,7 +41,7 @@
       width: 100vw;
       top: 0;
       bottom: 0;
-      background: #d4e8c8;
+      background: var(--bg-center);
       z-index: -1;
     }
     .page-header {
