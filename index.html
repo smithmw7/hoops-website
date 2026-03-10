@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hightop Games</title>
-  <meta name="description" content="Hightop Games LLC. Play Daily Reword and more.">
+  <meta name="description" content="Hightop Games LLC. Play Daily Reword, Aces, Corgi Cafe and more.">
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,15 +30,29 @@
       display: block;
       filter: drop-shadow(6px 8px 16px rgba(180, 168, 155, 0.55));
     }
-    .game-feature {
+    .games-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2.5rem;
+      padding: 1rem 0 2.5rem;
+      max-width: 800px;
+      width: 100%;
+    }
+    .game-card {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0.5rem 0 2rem;
-      gap: 1.25rem;
+      gap: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+      width: min(180px, 40vw);
+    }
+    .game-card:hover {
+      transform: translateY(-3px);
     }
     .app-icon {
-      width: min(180px, 45vw);
+      width: 100%;
       height: auto;
       border-radius: 22.37%;
       filter: drop-shadow(4px 6px 14px rgba(80, 80, 120, 0.35));
@@ -47,23 +61,32 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.8rem 2.4rem;
-      background: #4A90D9;
+      padding: 0.6rem 1.8rem;
+      background: #1e293b;
       color: #fff;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 700;
       border-radius: 999px;
       text-decoration: none;
       letter-spacing: 0.01em;
-      transition: background 0.2s ease, transform 0.15s ease;
-      box-shadow: 0 4px 14px rgba(74, 144, 217, 0.35);
+      box-shadow: 0 4px 14px rgba(30, 41, 59, 0.4);
+      transition: filter 0.2s ease;
     }
-    .game-pill:hover {
-      background: #3A7BC8;
-      transform: translateY(-1px);
+    .game-card:hover .game-pill {
+      filter: brightness(1.15);
     }
-    .game-pill:active {
-      transform: translateY(0);
+    @media (max-width: 600px) {
+      .games-grid {
+        gap: 1.5rem 1.25rem;
+      }
+      .game-card {
+        width: min(140px, 38vw);
+        gap: 0.7rem;
+      }
+      .game-pill {
+        padding: 0.5rem 1.4rem;
+        font-size: 0.85rem;
+      }
     }
     .legal {
       flex-shrink: 0;
@@ -84,16 +107,24 @@
     <img src="assets/images/LogoHightopGames.png" alt="Hightop Games" width="320" height="auto" />
   </div>
 
-  <section class="game-feature">
-    <a href="reword/index.html">
+  <section class="games-grid">
+    <a href="reword/index.html" class="game-card">
       <img src="assets/images/DailyRewordIcon.png" alt="Daily Reword App Icon" class="app-icon" />
+      <span class="game-pill">Daily Reword</span>
     </a>
-    <a href="reword/index.html" class="game-pill">Daily Reword</a>
+    <a href="aces/index.html" class="game-card">
+      <img src="assets/images/AcesIcon.png" alt="Aces App Icon" class="app-icon" />
+      <span class="game-pill">Aces</span>
+    </a>
+    <a href="corgicafe/index.html" class="game-card">
+      <img src="assets/images/CorgiCafeIcon.png" alt="Corgi Cafe App Icon" class="app-icon" />
+      <span class="game-pill">Corgi Cafe</span>
+    </a>
   </section>
 
   <footer class="legal">
     <p>Hightop Games LLC &copy; 2026</p>
-    <p><a href="reword/index.html">Daily Reword</a> &middot; <a href="aces/index.html">Aces</a></p>
+    <p><a href="reword/index.html">Daily Reword</a> &middot; <a href="aces/index.html">Aces</a> &middot; <a href="corgicafe/index.html">Corgi Cafe</a></p>
     <p><a href="reword/privacy.html">Privacy Policy</a> &middot; <a href="reword/terms.html">Terms of Service</a></p>
   </footer>
 </body>
