@@ -19,17 +19,51 @@
       padding: 2rem 1rem;
     }
     .logo-wrap {
-      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem 0;
+      padding: 2rem 0 1rem;
     }
     .logo-wrap img {
       max-width: min(320px, 85vw);
       height: auto;
       display: block;
       filter: drop-shadow(6px 8px 16px rgba(180, 168, 155, 0.55));
+    }
+    .game-feature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem 0 2rem;
+      gap: 1.25rem;
+    }
+    .app-icon {
+      width: min(180px, 45vw);
+      height: auto;
+      border-radius: 22.37%;
+      filter: drop-shadow(4px 6px 14px rgba(80, 80, 120, 0.35));
+    }
+    .game-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 2.4rem;
+      background: #4A90D9;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: background 0.2s ease, transform 0.15s ease;
+      box-shadow: 0 4px 14px rgba(74, 144, 217, 0.35);
+    }
+    .game-pill:hover {
+      background: #3A7BC8;
+      transform: translateY(-1px);
+    }
+    .game-pill:active {
+      transform: translateY(0);
     }
     .legal {
       flex-shrink: 0;
@@ -49,6 +83,14 @@
   <div class="logo-wrap">
     <img src="assets/images/LogoHightopGames.png" alt="Hightop Games" width="320" height="auto" />
   </div>
+
+  <section class="game-feature">
+    <a href="reword/index.html">
+      <img src="assets/images/DailyRewordIcon.png" alt="Daily Reword App Icon" class="app-icon" />
+    </a>
+    <a href="reword/index.html" class="game-pill">Daily Reword</a>
+  </section>
+
   <footer class="legal">
     <p>Hightop Games LLC &copy; 2026</p>
     <p><a href="reword/index.html">Daily Reword</a> &middot; <a href="aces/index.html">Aces</a></p>
