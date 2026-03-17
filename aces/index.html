@@ -80,6 +80,39 @@
       line-height: 1.5;
     }
 
+    /* Download section */
+    .download-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      padding: clamp(32px, 6vw, 56px) clamp(24px, 5vw, 48px) 0;
+      max-width: 640px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .download-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1rem, 4vw, 1.5rem);
+    }
+    .download-app-icon {
+      width: min(120px, 28vw);
+      height: auto;
+      border-radius: 22.37%;
+      filter: drop-shadow(4px 6px 14px rgba(80, 80, 120, 0.3));
+      flex-shrink: 0;
+    }
+    .app-store-badge {
+      height: 64px;
+      width: auto;
+      transition: opacity 0.2s ease;
+    }
+    .app-store-badge:hover {
+      opacity: 0.8;
+    }
+
     footer {
       width: 100%;
       max-width: 640px;
@@ -121,8 +154,21 @@
   <main class="hero">
     <h1 class="logo-wordmark">Aces</h1>
     <img src="assets/cards.png" alt="Four aces — clubs, diamonds, spades, hearts" class="cards-image" width="420" height="auto" />
-    <p class="tagline">Merge cards. Build your deck.</p>
+    <p class="tagline">Merge cards to reach Aces.</p>
   </main>
+
+  <section class="download-section">
+    <div class="download-top-row">
+      <img src="../assets/images/AcesIcon.png" alt="Aces - Official Card Puzzle App Icon" class="download-app-icon" />
+      <a href="https://apps.apple.com/us/app/aces-official-card-puzzle/id6759623356" target="_blank" rel="noopener">
+        <img
+          src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1736899200"
+          alt="Download on the App Store"
+          class="app-store-badge"
+        />
+      </a>
+    </div>
+  </section>
 
   <footer>
     <nav class="footer-links">
