@@ -299,6 +299,12 @@
           <span class="help-text">Please do not include passwords, payment card numbers, or other sensitive information.</span>
         </label>
 
+        <label id="uid-field" hidden>
+          User ID
+          <input id="uid" name="uid" type="text" readonly>
+          <span class="help-text">This is attached automatically so we can locate your account. Please leave it as is.</span>
+        </label>
+
         <label class="hp-field" aria-hidden="true">
           Company
           <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
@@ -325,6 +331,27 @@
     const form = document.getElementById('support-form');
     const submitButton = document.getElementById('submit-button');
     const statusMessage = document.getElementById('status-message');
+    const uidInput = document.getElementById('uid');
+    const uidField = document.getElementById('uid-field');
+
+    (function prefillFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+
+      const uidFromUrl = (params.get('uid') || '').trim();
+      if (uidFromUrl) {
+        uidInput.value = uidFromUrl;
+        uidField.hidden = false;
+      }
+
+      const gameFromUrl = (params.get('game') || '').trim();
+      if (gameFromUrl) {
+        const gameSelect = document.getElementById('game');
+        const match = Array.from(gameSelect.options).find(
+          (option) => option.value.toLowerCase() === gameFromUrl.toLowerCase()
+        );
+        if (match) gameSelect.value = match.value;
+      }
+    })();
 
     function setStatus(type, message) {
       statusMessage.hidden = false;
@@ -355,6 +382,7 @@
         requestType: document.getElementById('request-type').value,
         subject: document.getElementById('subject').value.trim(),
         message: document.getElementById('message').value.trim(),
+        uid: uidInput.value.trim(),
         pageUrl: window.location.href,
         company: document.getElementById('company').value.trim(),
       };
