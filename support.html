@@ -188,9 +188,39 @@
       background: var(--accent-dark);
     }
 
+    button:disabled {
+      background: #94a3b8;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
     .submit-copy {
       color: var(--muted);
       font-size: 0.88rem;
+    }
+
+    .status-message {
+      border-radius: 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      padding: 1rem;
+    }
+
+    .status-message.success {
+      background: #ecfdf5;
+      border: 1px solid #86efac;
+      color: #166534;
+    }
+
+    .status-message.error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+
+    .hp-field {
+      display: none;
     }
 
     .site-links {
@@ -225,23 +255,28 @@
       <h1>We would love to hear from you.</h1>
       <p class="intro">At Hightop Games, we care about making our games feel fair, fun, and welcoming. We will work with players on resolving issues, bugs, concerns, account questions, and suggestions.</p>
 
-      <p class="contact-note">You can always reach us directly at <a href="mailto:support@hightopgames.com">support@hightopgames.com</a>. This form opens your email app with a unique support ticket number already included.</p>
+      <p class="contact-note">You can always reach us directly at <a href="mailto:support@hightopgames.com">support@hightopgames.com</a>. This form submits your request to Hightop Games and returns a support ticket number on this page.</p>
 
       <form id="support-form">
         <div class="field-grid">
           <label>
-            Support ticket
-            <input id="ticket" name="ticket" type="text" readonly>
-            <span class="help-text">Generated on this device when the page loads.</span>
-          </label>
-
-          <label>
             Game
-            <select id="game" name="game">
+            <select id="game" name="game" required>
               <option value="Aces">Aces</option>
               <option value="Daily Reword">Daily Reword</option>
               <option value="Corgi Cafe">Corgi Cafe</option>
               <option value="Other Hightop Games title">Other Hightop Games title</option>
+            </select>
+          </label>
+
+          <label>
+            Request type
+            <select id="request-type" name="request-type" required>
+              <option value="Bug report">Bug report</option>
+              <option value="Gameplay help">Gameplay help</option>
+              <option value="Account or purchase question">Account or purchase question</option>
+              <option value="Suggestion">Suggestion</option>
+              <option value="Other">Other</option>
             </select>
           </label>
         </div>
@@ -253,32 +288,28 @@
           </label>
 
           <label>
-            Request type
-            <select id="request-type" name="request-type">
-              <option value="Bug report">Bug report</option>
-              <option value="Gameplay help">Gameplay help</option>
-              <option value="Account or purchase question">Account or purchase question</option>
-              <option value="Suggestion">Suggestion</option>
-              <option value="Other">Other</option>
-            </select>
+            Subject
+            <input id="subject" name="subject" type="text" maxlength="120" placeholder="How can we help?" required>
           </label>
         </div>
 
         <label>
-          Subject
-          <input id="subject" name="subject" type="text" maxlength="120" placeholder="How can we help?" required>
-        </label>
-
-        <label>
           Details
-          <textarea id="message" name="message" placeholder="Tell us what happened, what device you are using, and any steps that help us reproduce the issue." required></textarea>
+          <textarea id="message" name="message" maxlength="4000" placeholder="Tell us what happened, what device you are using, and any steps that help us reproduce the issue." required></textarea>
           <span class="help-text">Please do not include passwords, payment card numbers, or other sensitive information.</span>
         </label>
 
+        <label class="hp-field" aria-hidden="true">
+          Company
+          <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </label>
+
         <div class="submit-row">
-          <button type="submit">Open Email Request</button>
-          <p class="submit-copy">Your email app will open so you can review and send the request.</p>
+          <button id="submit-button" type="submit">Submit Support Request</button>
+          <p class="submit-copy">We will confirm your ticket number here after submission.</p>
         </div>
+
+        <p id="status-message" class="status-message" hidden></p>
       </form>
     </section>
 
@@ -290,46 +321,73 @@
   </main>
 
   <script>
-    const supportEmail = 'support@hightopgames.com';
-    const ticketInput = document.getElementById('ticket');
+    const SUPPORT_ENDPOINT = 'https://us-central1-aces-hightop-aces.cloudfunctions.net/submitSupportRequest';
     const form = document.getElementById('support-form');
+    const submitButton = document.getElementById('submit-button');
+    const statusMessage = document.getElementById('status-message');
 
-    function generateTicketId() {
-      const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-      const randomValue = window.crypto && window.crypto.randomUUID
-        ? window.crypto.randomUUID().split('-')[0].toUpperCase()
-        : Math.random().toString(36).slice(2, 10).toUpperCase();
-
-      return `HTG-${date}-${randomValue}`;
+    function setStatus(type, message) {
+      statusMessage.hidden = false;
+      statusMessage.className = `status-message ${type}`;
+      statusMessage.textContent = message;
     }
 
-    ticketInput.value = generateTicketId();
+    function clearStatus() {
+      statusMessage.hidden = true;
+      statusMessage.className = 'status-message';
+      statusMessage.textContent = '';
+    }
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      clearStatus();
 
       if (!form.reportValidity()) {
         return;
       }
 
-      const ticket = ticketInput.value;
-      const game = document.getElementById('game').value;
-      const replyTo = document.getElementById('email').value.trim();
-      const requestType = document.getElementById('request-type').value;
-      const subject = document.getElementById('subject').value.trim();
-      const message = document.getElementById('message').value.trim();
-      const emailSubject = `[${ticket}] ${game} Support: ${subject}`;
-      const emailBody = [
-        `Support Ticket: ${ticket}`,
-        `Game: ${game}`,
-        `Request Type: ${requestType}`,
-        `Reply-To: ${replyTo}`,
-        '',
-        'Details:',
-        message,
-      ].join('\n');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Submitting...';
 
-      window.location.href = `mailto:${supportEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+      const payload = {
+        game: document.getElementById('game').value,
+        email: document.getElementById('email').value.trim(),
+        requestType: document.getElementById('request-type').value,
+        subject: document.getElementById('subject').value.trim(),
+        message: document.getElementById('message').value.trim(),
+        pageUrl: window.location.href,
+        company: document.getElementById('company').value.trim(),
+      };
+
+      try {
+        const response = await fetch(SUPPORT_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || !result.ok || !result.ticketId) {
+          throw new Error(result.error || 'request_failed');
+        }
+
+        setStatus(
+          'success',
+          `Thanks! Your support ticket is ${result.ticketId}. We received your request and will follow up at ${payload.email}.`
+        );
+        form.reset();
+      } catch (error) {
+        setStatus(
+          'error',
+          'We could not submit your request right now. Please try again, or email support@hightopgames.com directly.'
+        );
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Submit Support Request';
+      }
     });
   </script>
 </body>
