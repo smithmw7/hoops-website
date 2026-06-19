@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support - Hightop Games</title>
+  <meta name="description" content="Contact Hightop Games support for help, bug reports, questions, and suggestions.">
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <style>
+    :root {
+      --bg: #f5f0e8;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2d8cc;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --shadow: rgba(75, 65, 55, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--bg);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 32rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: clamp(1.5rem, 5vw, 3rem) 1rem;
+    }
+
+    .page {
+      width: min(760px, 100%);
+      margin: 0 auto;
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .brand-link:hover {
+      color: var(--text);
+    }
+
+    .support-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: 0 24px 60px var(--shadow);
+      padding: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 7vw, 3.5rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .intro {
+      color: var(--muted);
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      max-width: 58ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-note {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      color: #1e3a8a;
+      margin-bottom: 2rem;
+      padding: 1rem;
+    }
+
+    .contact-note a {
+      color: #1d4ed8;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .contact-note a:hover {
+      text-decoration: underline;
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    label {
+      display: grid;
+      gap: 0.4rem;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--text);
+      font: inherit;
+      padding: 0.85rem 0.95rem;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+      outline: none;
+    }
+
+    input[readonly] {
+      background: #f8fafc;
+      color: var(--muted);
+    }
+
+    .help-text {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .submit-row {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    button {
+      background: var(--accent);
+      border: 0;
+      border-radius: 999px;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.24);
+      color: #ffffff;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 900;
+      padding: 0.9rem 1.4rem;
+    }
+
+    button:hover {
+      background: var(--accent-dark);
+    }
+
+    .submit-copy {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .site-links {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .site-links a {
+      color: var(--muted);
+      text-decoration: underline;
+    }
+
+    .site-links a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 640px) {
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="brand-link" href="index.html">&larr; Hightop Games</a>
+
+    <section class="support-card">
+      <p class="eyebrow">Player Support</p>
+      <h1>We would love to hear from you.</h1>
+      <p class="intro">At Hightop Games, we care about making our games feel fair, fun, and welcoming. We will work with players on resolving issues, bugs, concerns, account questions, and suggestions.</p>
+
+      <p class="contact-note">You can always reach us directly at <a href="mailto:support@hightopgames.com">support@hightopgames.com</a>. This form opens your email app with a unique support ticket number already included.</p>
+
+      <form id="support-form">
+        <div class="field-grid">
+          <label>
+            Support ticket
+            <input id="ticket" name="ticket" type="text" readonly>
+            <span class="help-text">Generated on this device when the page loads.</span>
+          </label>
+
+          <label>
+            Game
+            <select id="game" name="game">
+              <option value="Aces">Aces</option>
+              <option value="Daily Reword">Daily Reword</option>
+              <option value="Corgi Cafe">Corgi Cafe</option>
+              <option value="Other Hightop Games title">Other Hightop Games title</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="field-grid">
+          <label>
+            Your email
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          </label>
+
+          <label>
+            Request type
+            <select id="request-type" name="request-type">
+              <option value="Bug report">Bug report</option>
+              <option value="Gameplay help">Gameplay help</option>
+              <option value="Account or purchase question">Account or purchase question</option>
+              <option value="Suggestion">Suggestion</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Subject
+          <input id="subject" name="subject" type="text" maxlength="120" placeholder="How can we help?" required>
+        </label>
+
+        <label>
+          Details
+          <textarea id="message" name="message" placeholder="Tell us what happened, what device you are using, and any steps that help us reproduce the issue." required></textarea>
+          <span class="help-text">Please do not include passwords, payment card numbers, or other sensitive information.</span>
+        </label>
+
+        <div class="submit-row">
+          <button type="submit">Open Email Request</button>
+          <p class="submit-copy">Your email app will open so you can review and send the request.</p>
+        </div>
+      </form>
+    </section>
+
+    <p class="site-links">
+      <a href="index.html">Games</a> &middot;
+      <a href="aces/privacy.html">Privacy Policy</a> &middot;
+      <a href="aces/terms.html">Terms of Service</a>
+    </p>
+  </main>
+
+  <script>
+    const supportEmail = 'support@hightopgames.com';
+    const ticketInput = document.getElementById('ticket');
+    const form = document.getElementById('support-form');
+
+    function generateTicketId() {
+      const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      const randomValue = window.crypto && window.crypto.randomUUID
+        ? window.crypto.randomUUID().split('-')[0].toUpperCase()
+        : Math.random().toString(36).slice(2, 10).toUpperCase();
+
+      return `HTG-${date}-${randomValue}`;
+    }
+
+    ticketInput.value = generateTicketId();
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      const ticket = ticketInput.value;
+      const game = document.getElementById('game').value;
+      const replyTo = document.getElementById('email').value.trim();
+      const requestType = document.getElementById('request-type').value;
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const emailSubject = `[${ticket}] ${game} Support: ${subject}`;
+      const emailBody = [
+        `Support Ticket: ${ticket}`,
+        `Game: ${game}`,
+        `Request Type: ${requestType}`,
+        `Reply-To: ${replyTo}`,
+        '',
+        'Details:',
+        message,
+      ].join('\n');
+
+      window.location.href = `mailto:${supportEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    });
+  </script>
+</body>
+</html>
