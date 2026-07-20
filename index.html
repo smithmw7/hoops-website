@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hightop Games</title>
-  <meta name="description" content="Hightop Games LLC. Play Daily Reword, Aces, Corgi Cafe and more.">
+  <meta name="description" content="Hightop Games LLC. Play Daily Reword, Aces, Corgi Cafe, Hightop Hoops and more.">
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,7 +36,7 @@
       justify-content: center;
       gap: 2.5rem;
       padding: 1rem 0 2.5rem;
-      max-width: 800px;
+      max-width: 920px;
       width: 100%;
     }
     .game-card {
@@ -51,11 +51,25 @@
     .game-card:hover {
       transform: translateY(-3px);
     }
+    /* Shadow lives on the shell, not the <img>: the icon PNGs are opaque
+       squares, so filter: drop-shadow traces the square alpha and leaks past
+       the rounded corners. box-shadow follows border-radius exactly. */
+    .icon-shell {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 22.37%;
+      overflow: hidden;
+      box-shadow: 4px 6px 14px rgba(80, 80, 120, 0.35);
+      transition: box-shadow 0.2s ease;
+    }
+    .game-card:hover .icon-shell {
+      box-shadow: 5px 9px 20px rgba(80, 80, 120, 0.4);
+    }
     .app-icon {
       width: 100%;
-      height: auto;
-      border-radius: 22.37%;
-      filter: drop-shadow(4px 6px 14px rgba(80, 80, 120, 0.35));
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
     .game-pill {
       display: inline-flex;
@@ -69,6 +83,7 @@
       border-radius: 999px;
       text-decoration: none;
       letter-spacing: 0.01em;
+      white-space: nowrap;
       box-shadow: 0 4px 14px rgba(30, 41, 59, 0.4);
       transition: filter 0.2s ease;
     }
@@ -84,8 +99,8 @@
         gap: 0.7rem;
       }
       .game-pill {
-        padding: 0.5rem 1.4rem;
-        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
       }
     }
     .legal {
@@ -109,22 +124,34 @@
 
   <section class="games-grid">
     <a href="reword/index.html" class="game-card">
-      <img src="assets/images/DailyRewordIcon.png" alt="Daily Reword App Icon" class="app-icon" />
+      <div class="icon-shell">
+        <img src="assets/images/DailyRewordIcon.png" alt="Daily Reword App Icon" class="app-icon" />
+      </div>
       <span class="game-pill">Daily Reword</span>
     </a>
     <a href="aces/index.html" class="game-card">
-      <img src="assets/images/AcesIcon.png" alt="Aces App Icon" class="app-icon" />
+      <div class="icon-shell">
+        <img src="assets/images/AcesIcon.png" alt="Aces App Icon" class="app-icon" />
+      </div>
       <span class="game-pill">Aces</span>
     </a>
     <a href="corgicafe/index.html" class="game-card">
-      <img src="assets/images/CorgiCafeIcon.png" alt="Corgi Cafe App Icon" class="app-icon" />
+      <div class="icon-shell">
+        <img src="assets/images/CorgiCafeIcon.png" alt="Corgi Cafe App Icon" class="app-icon" />
+      </div>
       <span class="game-pill">Corgi Cafe</span>
+    </a>
+    <a href="hoops/index.html" class="game-card">
+      <div class="icon-shell">
+        <img src="assets/images/HightopHoopsIcon.png" alt="Hightop Hoops App Icon" class="app-icon" />
+      </div>
+      <span class="game-pill">Hightop Hoops</span>
     </a>
   </section>
 
   <footer class="legal">
     <p>Hightop Games LLC &copy; 2026</p>
-    <p><a href="reword/index.html">Daily Reword</a> &middot; <a href="aces/index.html">Aces</a> &middot; <a href="corgicafe/index.html">Corgi Cafe</a></p>
+    <p><a href="reword/index.html">Daily Reword</a> &middot; <a href="aces/index.html">Aces</a> &middot; <a href="corgicafe/index.html">Corgi Cafe</a> &middot; <a href="hoops/index.html">Hightop Hoops</a></p>
     <p><a href="reword/privacy.html">Privacy Policy</a> &middot; <a href="reword/terms.html">Terms of Service</a> &middot; <a href="support.html">Support</a></p>
   </footer>
 </body>
