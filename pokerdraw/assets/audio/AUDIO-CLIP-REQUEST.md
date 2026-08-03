@@ -61,8 +61,7 @@ The files in `cues/`, `music/`, and `ambience/` are temporary placeholders. Repl
 
 | Exact filename | Target sound and timing |
 | --- | --- |
-| `music-gameplay-loop-01.mp3` | Main premium poker/casino gameplay loop, seamless, approximately 90–180 s. Energetic but leaves space for rapid SFX. |
-| `music-gameplay-loop-02.mp3` | Compatible alternate loop with the same loudness and tonal world, seamless, approximately 90–180 s. |
+| `music-gameplay-loop-01.mp3` | The single premium poker/casino music track used for the entire game. It must loop seamlessly, approximately 90–180 s, and leave space for rapid SFX. The game never rotates to another music track. |
 | `ambience-poker-room-loop.mp3` | Very subtle premium card-room bed: soft room air, distant chips/cards, no clear voices, seamless, approximately 30–90 s. |
 
 ## Replacement folders
