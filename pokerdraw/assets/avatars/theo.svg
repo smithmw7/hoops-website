@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Theo avatar">
+  <rect width="160" height="160" fill="#17264b"/>
+  <circle cx="80" cy="68" r="41" fill="#b97959"/>
+  <path d="M38 63c3-30 18-45 43-45 27 0 42 15 44 46-18-17-49-25-87-1z" fill="#20273a"/>
+  <path d="M16 160c8-42 30-62 64-62 35 0 57 20 64 62" fill="#3157a9"/>
+  <g fill="none" stroke="#14223e" stroke-width="5"><rect x="48" y="66" width="27" height="18" rx="7"/><rect x="85" y="66" width="27" height="18" rx="7"/><path d="M75 74h10"/></g>
+  <circle cx="63" cy="75" r="3" fill="#0d182c"/><circle cx="98" cy="75" r="3" fill="#0d182c"/>
+  <path d="M69 92c7 3 15 3 22 0" fill="none" stroke="#713c35" stroke-width="3" stroke-linecap="round"/>
+</svg>

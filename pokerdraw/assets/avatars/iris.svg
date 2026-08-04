@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Iris avatar">
+  <rect width="160" height="160" fill="#13342f"/>
+  <circle cx="80" cy="69" r="41" fill="#9b694f"/>
+  <path d="M36 68c1-34 17-51 45-51 30 0 46 20 46 56l-13-21c-21 10-43 9-66-2l-10 24z" fill="#d7d9e5"/>
+  <path d="M112 53c21 25 23 48 5 70l-13-12c13-20 16-39 8-58z" fill="#b8bfd2"/>
+  <path d="M17 160c8-42 29-63 63-63 35 0 56 21 63 63" fill="#23846d"/>
+  <path d="M53 70c8-5 16-5 23 0m9 0c8-5 16-5 23 0" fill="none" stroke="#27352f" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="65" cy="75" r="3" fill="#17251f"/><circle cx="97" cy="75" r="3" fill="#17251f"/>
+  <path d="M70 92c7 3 14 3 21 0" fill="none" stroke="#673d36" stroke-width="3" stroke-linecap="round"/>
+</svg>

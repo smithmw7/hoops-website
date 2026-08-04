@@ -1,0 +1,1 @@
+function n(a){let t=a>>>0;return()=>{t+=1831565813;let e=t;return e=Math.imul(e^e>>>15,e|1),e^=e+Math.imul(e^e>>>7,e|61),((e^e>>>14)>>>0)/4294967296}}function r(){const a=Date.now()>>>0,t=Math.floor(Math.random()*4294967295)>>>0;return(a^t)>>>0}export{r as a,n as c};

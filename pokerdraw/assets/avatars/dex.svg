@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Dex avatar">
+  <rect width="160" height="160" fill="#321b31"/>
+  <circle cx="80" cy="71" r="40" fill="#cc8b62"/>
+  <path d="M38 65c5-30 20-45 46-45 27 0 42 17 42 49-20-14-50-18-88-4z" fill="#1e2538"/>
+  <path d="M25 44c16-24 45-34 86-22l17 21c-38-8-72-8-103 1z" fill="#d9575b"/>
+  <path d="M17 160c8-43 29-63 63-63s55 20 63 63" fill="#803f66"/>
+  <path d="M51 70l23-5m12 0 24 7" stroke="#392335" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="65" cy="76" r="3" fill="#211628"/><circle cx="97" cy="77" r="3" fill="#211628"/>
+  <path d="M70 92h23" stroke="#7d343d" stroke-width="4" stroke-linecap="round"/>
+</svg>

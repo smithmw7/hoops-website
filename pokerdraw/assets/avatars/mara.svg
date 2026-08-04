@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Mara avatar">
+  <rect width="160" height="160" fill="#102b38"/>
+  <circle cx="80" cy="70" r="42" fill="#d7a887"/>
+  <path d="M36 72c0-36 18-54 45-54 32 0 48 22 45 61l-14-17-8-23c-18 16-37 19-59 12z" fill="#172134"/>
+  <path d="M19 160c8-43 29-63 61-63 34 0 55 20 62 63" fill="#1c766f"/>
+  <path d="M52 72c9-5 17-5 25 0m7 0c8-5 16-5 24 0" fill="none" stroke="#1f293c" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="65" cy="76" r="3" fill="#162334"/><circle cx="96" cy="76" r="3" fill="#162334"/>
+  <path d="M70 91c7 4 14 4 21 0" fill="none" stroke="#8c4f48" stroke-width="3" stroke-linecap="round"/>
+</svg>
