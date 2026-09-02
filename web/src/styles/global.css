@@ -92,6 +92,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   min-height: min(960px, 100svh);
   display: flex;
   align-items: flex-end;
+  overflow-x: clip;
   padding: 150px 32px clamp(70px, 8vw, 120px);
   background: var(--black);
   color: white;
@@ -107,13 +108,26 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .hero-brand-lockup::before {
   position: absolute;
   z-index: -1;
-  inset: -42% -55%;
+  inset: -24% -18%;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(31, 57, 101, 0.3) 0%, rgba(18, 37, 70, 0.14) 38%, transparent 72%);
+  background: radial-gradient(ellipse, rgba(34, 73, 129, 0.24) 0%, rgba(17, 42, 81, 0.1) 36%, transparent 70%);
   content: "";
-  filter: blur(18px);
+  filter: blur(24px);
 }
-.hero-brand-lockup img { width: 100%; height: auto; filter: drop-shadow(0 0 30px rgba(47, 76, 128, 0.18)); }
+.hero-brand-mark { position: relative; width: 100%; transform-origin: 50% 50%; will-change: transform; }
+.hero-brand-mark img { width: 100%; height: auto; filter: drop-shadow(0 0 30px rgba(47, 76, 128, 0.18)); }
+.hero-logo-glint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.58) 50%, transparent 58%);
+  background-position: 180% 0;
+  background-size: 260% 100%;
+  content: "";
+  opacity: 0.2;
+  pointer-events: none;
+  -webkit-mask: url("/assets/images/LogoHightopGames.png") center / contain no-repeat;
+  mask: url("/assets/images/LogoHightopGames.png") center / contain no-repeat;
+}
 .hero-games {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -257,9 +271,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .card-kings-kingdom-art {
   position: absolute;
   z-index: -2;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: -6% -3%;
+  width: 106%;
+  max-width: none;
+  height: 112%;
   object-fit: cover;
   object-position: center;
 }

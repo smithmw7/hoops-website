@@ -124,6 +124,27 @@ export function HomePage() {
           .from('.hero-brand-lockup img', { autoAlpha: 0, scale: 0.96, duration: 1.1 })
           .from('.hero-game', { autoAlpha: 0, y: 22, duration: 0.7, stagger: 0.08 }, '-=0.58');
 
+        gsap.to('.hero-brand-mark', {
+          y: -6,
+          scale: 1.012,
+          duration: 3.4,
+          delay: 1.1,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+        });
+        gsap.fromTo('.hero-logo-glint',
+          { backgroundPosition: '180% 0' },
+          {
+            backgroundPosition: '-80% 0',
+            duration: 1.45,
+            delay: 2.4,
+            ease: 'power1.inOut',
+            repeat: -1,
+            repeatDelay: 5.2,
+          },
+        );
+
         gsap.utils.toArray<HTMLElement>('.game-chapter-aces, .game-chapter-reword').forEach((section) => {
           const header = section.querySelector('.chapter-header');
           const lines = section.querySelectorAll('.tagline-line');
@@ -171,9 +192,12 @@ export function HomePage() {
           ease: 'power3.out',
           scrollTrigger: { trigger: '.card-kings-copy', start: 'top 76%', once: true },
         });
-        gsap.to('.card-kings-kingdom-art', {
+        gsap.fromTo('.card-kings-kingdom-art', {
+          yPercent: -2.5,
+          scale: 1.02,
+        }, {
           yPercent: 5,
-          scale: 1.04,
+          scale: 1.055,
           ease: 'none',
           scrollTrigger: { trigger: '.card-kings-kingdom', start: 'top bottom', end: 'bottom top', scrub: 1.2 },
         });
@@ -250,7 +274,10 @@ export function HomePage() {
           <div className="hero-content">
             <h1 className="visually-hidden" id="home-title">Hightop Games</h1>
             <div className="hero-brand-lockup">
-              <img src="/assets/images/LogoHightopGames.png" alt="Hightop Games" width="813" height="350" />
+              <div className="hero-brand-mark">
+                <img src="/assets/images/LogoHightopGames.png" alt="Hightop Games" width="813" height="350" />
+                <span className="hero-logo-glint" aria-hidden="true" />
+              </div>
             </div>
             <div className="hero-games" aria-label="Featured Hightop Games titles">
               {featuredGames.map((game) => (
