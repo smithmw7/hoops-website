@@ -33,6 +33,10 @@ const routes = [
   ['support', 'Player Support — Hightop Games', 'Get help with a Hightop Games title or share feedback with the studio.'],
 ];
 
+const redirects = [
+  ['yahoo', '/'],
+];
+
 for (const [source, destination] of trees) {
   await cp(join(root, source), join(dist, destination), { recursive: true, force: true });
 }
@@ -58,4 +62,25 @@ for (const [route, title, description] of routes) {
   await writeFile(join(routeDirectory, 'index.html'), routeHtml);
 }
 
-console.log(`Created ${routes.length} route entrypoints and copied ${trees.length} static trees plus ${files.length} preserved files into dist/.`);
+for (const [route, destination] of redirects) {
+  const routeDirectory = join(dist, route);
+  const redirectHtml = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="0; url=${destination}" />
+    <link rel="canonical" href="https://hightopgames.com${destination}" />
+    <title>Hightop Games</title>
+    <script>window.location.replace(${JSON.stringify(destination)});</script>
+  </head>
+  <body>
+    <p><a href="${destination}">Continue to Hightop Games</a></p>
+  </body>
+</html>
+`;
+  await mkdir(routeDirectory, { recursive: true });
+  await writeFile(join(routeDirectory, 'index.html'), redirectHtml);
+}
+
+console.log(`Created ${routes.length} route entrypoints, ${redirects.length} redirect, and copied ${trees.length} static trees plus ${files.length} preserved files into dist/.`);
