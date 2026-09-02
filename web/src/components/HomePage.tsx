@@ -105,6 +105,51 @@ function PreviewGameSection({ game }: { game: Game }) {
   );
 }
 
+const frostParticles = Array.from({ length: 18 }, (_, index) => ({
+  size: `${3 + (index % 4) * 1.5}px`,
+}));
+
+function FrostFeatureSection() {
+  return (
+    <section id="frost" className="hoops-frost-feature" aria-labelledby="frost-title">
+      <div className="frost-copy">
+        <p className="chapter-kicker">Hightop Hoops · Frost Court</p>
+        <h2 id="frost-title">Frost.</h2>
+      </div>
+      <img
+        className="frost-character"
+        src="/assets/images/hoops/frost/character.webp"
+        alt="Frost spinning a basketball"
+        width="721"
+        height="1005"
+        loading="lazy"
+      />
+      <div className="frost-shoe-stage" aria-label="Frost signature shoe">
+        <span className="frost-shoe-glow" aria-hidden="true" />
+        <div className="frost-particles" aria-hidden="true">
+          {frostParticles.map((particle, index) => (
+            <span
+              className="frost-particle"
+              key={index}
+              style={{ '--frost-particle-size': particle.size } as CSSProperties}
+            />
+          ))}
+        </div>
+        <div className="frost-shoe-float">
+          <img
+            className="frost-shoe"
+            src="/assets/images/hoops/frost/signature-shoe.webp"
+            alt="Frost orange signature high-top sneaker"
+            width="1254"
+            height="1254"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function HomePage() {
   const pageRef = useRef<HTMLDivElement>(null);
   const reword = games.find((game) => game.slug === 'reword')!;
@@ -244,6 +289,83 @@ export function HomePage() {
           });
         });
 
+        gsap.from('.frost-copy > *', {
+          autoAlpha: 0,
+          y: 24,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: '.hoops-frost-feature', start: 'top 72%', once: true },
+        });
+        gsap.from('.frost-character', {
+          autoAlpha: 0,
+          x: -54,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: '.hoops-frost-feature', start: 'top 70%', once: true },
+        });
+        gsap.from('.frost-shoe-stage', {
+          autoAlpha: 0,
+          x: 48,
+          scale: 0.96,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: '.hoops-frost-feature', start: 'top 68%', once: true },
+        });
+        gsap.to('.frost-shoe-float', {
+          y: -13,
+          rotation: 1.3,
+          scale: 1.018,
+          duration: 3.5,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+          scrollTrigger: {
+            trigger: '.hoops-frost-feature',
+            start: 'top bottom',
+            end: 'bottom top',
+            toggleActions: 'play pause resume pause',
+          },
+        });
+        gsap.to('.frost-shoe-glow', {
+          autoAlpha: 0.78,
+          scale: 1.08,
+          duration: 2.8,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+          scrollTrigger: {
+            trigger: '.hoops-frost-feature',
+            start: 'top bottom',
+            end: 'bottom top',
+            toggleActions: 'play pause resume pause',
+          },
+        });
+
+        const particleLoop = gsap.timeline({
+          repeat: -1,
+          repeatDelay: 0.25,
+          scrollTrigger: {
+            trigger: '.hoops-frost-feature',
+            start: 'top bottom',
+            end: 'bottom top',
+            toggleActions: 'play pause resume pause',
+          },
+        });
+        gsap.utils.toArray<HTMLElement>('.frost-particle').forEach((particle, index) => {
+          const start = index * 0.2;
+          const startX = ((index * 47) % 210) - 105;
+          const drift = ((index * 31) % 58) - 29;
+          const rise = 170 + (index % 5) * 22;
+          const duration = 2.45 + (index % 4) * 0.22;
+
+          particleLoop
+            .set(particle, { x: startX, y: 68 + (index % 3) * 12, scale: 0.45, autoAlpha: 0 }, start)
+            .to(particle, { autoAlpha: 0.72, duration: 0.28, ease: 'power1.out' }, start)
+            .to(particle, { x: startX + drift, y: -rise, scale: 1.08, duration, ease: 'sine.out' }, start)
+            .to(particle, { autoAlpha: 0, duration: 0.55, ease: 'power1.in' }, start + duration - 0.55);
+        });
+
         gsap.from('.studio-signoff > *', {
           autoAlpha: 0,
           y: 20,
@@ -296,6 +418,7 @@ export function HomePage() {
           <StoreGameSection game={reword} />
           <CardKingsSection game={cardKings} />
           <PreviewGameSection game={hoops} />
+          <FrostFeatureSection />
           <PreviewGameSection game={corgiCafe} />
         </div>
 
