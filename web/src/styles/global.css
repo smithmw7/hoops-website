@@ -378,10 +378,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 /* Hightop Hoops — Frost */
 .hoops-frost-feature {
   position: relative;
-  min-height: min(980px, 100svh);
+  min-height: min(900px, 100svh);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.95fr);
-  align-items: end;
+  place-items: center;
   overflow: hidden;
   isolation: isolate;
   background:
@@ -400,43 +399,33 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   opacity: 0.065;
   pointer-events: none;
 }
-.frost-copy {
-  position: absolute;
-  z-index: 3;
-  top: clamp(70px, 9vw, 130px);
-  left: 50%;
-  width: min(calc(100% - 64px), 900px);
-  text-align: center;
-  transform: translateX(-50%);
-}
-.frost-copy .chapter-kicker { color: rgba(204, 236, 255, 0.62); }
-.frost-copy h2 {
-  margin: 12px 0 0;
-  font-size: clamp(5.5rem, 12vw, 12rem);
-  font-weight: 600;
-  letter-spacing: -0.075em;
-  line-height: 0.86;
-  text-shadow: 0 20px 70px rgba(60, 156, 224, 0.2);
+.frost-art-pair {
+  position: relative;
+  z-index: 2;
+  width: min(calc(100% - 48px), 1100px);
+  height: min(780px, 88svh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-3%);
 }
 .frost-character {
   position: relative;
   z-index: 2;
-  align-self: end;
-  width: min(48vw, 650px);
-  max-height: 88%;
-  margin-left: max(20px, calc((100vw - var(--site-width)) / 2));
+  width: min(50vw, 640px);
+  max-height: 95%;
+  margin: 0;
   object-fit: contain;
-  object-position: left bottom;
+  object-position: center;
   filter: drop-shadow(0 40px 35px rgba(0, 7, 18, 0.48));
 }
 .frost-shoe-stage {
   position: relative;
   z-index: 2;
-  align-self: center;
-  justify-self: center;
-  width: min(44vw, 620px);
+  flex: 0 0 min(40vw, 520px);
+  width: min(40vw, 520px);
   aspect-ratio: 1;
-  margin-top: 100px;
+  margin: -2% 0 0 -8%;
 }
 .frost-shoe-glow {
   position: absolute;
@@ -620,22 +609,26 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .preview-copy h2 { font-size: clamp(4.7rem, 22vw, 7rem); }
   .preview-copy h3 { font-size: clamp(2.5rem, 12vw, 4rem); }
   .preview-game > img { width: min(76vw, 390px); }
-  .hoops-frost-feature { min-height: 900px; display: block; }
-  .frost-copy { top: 72px; width: calc(100% - 32px); }
-  .frost-copy h2 { margin-top: 10px; font-size: clamp(6rem, 28vw, 8rem); }
+  .hoops-frost-feature { min-height: 850px; }
+  .frost-art-pair {
+    width: 100%;
+    height: min(760px, 92svh);
+    display: block;
+    transform: translateY(-4%);
+  }
   .frost-character {
     position: absolute;
-    bottom: -1%;
-    left: -11%;
-    width: min(88vw, 470px);
-    max-height: 61%;
+    bottom: 7%;
+    left: -9%;
+    width: min(84vw, 440px);
+    max-height: 66%;
     margin: 0;
   }
   .frost-shoe-stage {
     position: absolute;
-    top: 27%;
-    right: -8%;
-    width: min(72vw, 370px);
+    top: 20%;
+    right: -1%;
+    width: min(68vw, 340px);
     margin: 0;
   }
   .frost-shoe-glow { width: 82%; }

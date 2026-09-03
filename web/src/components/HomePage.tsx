@@ -111,39 +111,37 @@ const frostParticles = Array.from({ length: 18 }, (_, index) => ({
 
 function FrostFeatureSection() {
   return (
-    <section id="frost" className="hoops-frost-feature" aria-labelledby="frost-title">
-      <div className="frost-copy">
-        <p className="chapter-kicker">Hightop Hoops · Frost Court</p>
-        <h2 id="frost-title">Frost.</h2>
-      </div>
-      <img
-        className="frost-character"
-        src="/assets/images/hoops/frost/character.webp"
-        alt="Frost spinning a basketball"
-        width="721"
-        height="1005"
-        loading="lazy"
-      />
-      <div className="frost-shoe-stage" aria-label="Frost signature shoe">
-        <span className="frost-shoe-glow" aria-hidden="true" />
-        <div className="frost-particles" aria-hidden="true">
-          {frostParticles.map((particle, index) => (
-            <span
-              className="frost-particle"
-              key={index}
-              style={{ '--frost-particle-size': particle.size } as CSSProperties}
+    <section id="frost" className="hoops-frost-feature" aria-label="Frost signature collection">
+      <div className="frost-art-pair">
+        <img
+          className="frost-character"
+          src="/assets/images/hoops/frost/character.webp"
+          alt="Frost spinning a basketball"
+          width="721"
+          height="1005"
+          loading="lazy"
+        />
+        <div className="frost-shoe-stage" aria-label="Frost signature shoe">
+          <span className="frost-shoe-glow" aria-hidden="true" />
+          <div className="frost-particles" aria-hidden="true">
+            {frostParticles.map((particle, index) => (
+              <span
+                className="frost-particle"
+                key={index}
+                style={{ '--frost-particle-size': particle.size } as CSSProperties}
+              />
+            ))}
+          </div>
+          <div className="frost-shoe-float">
+            <img
+              className="frost-shoe"
+              src="/assets/images/hoops/frost/signature-shoe.webp"
+              alt="Frost orange signature high-top sneaker"
+              width="1254"
+              height="1254"
+              loading="lazy"
             />
-          ))}
-        </div>
-        <div className="frost-shoe-float">
-          <img
-            className="frost-shoe"
-            src="/assets/images/hoops/frost/signature-shoe.webp"
-            alt="Frost orange signature high-top sneaker"
-            width="1254"
-            height="1254"
-            loading="lazy"
-          />
+          </div>
         </div>
       </div>
     </section>
@@ -289,14 +287,6 @@ export function HomePage() {
           });
         });
 
-        gsap.from('.frost-copy > *', {
-          autoAlpha: 0,
-          y: 24,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: '.hoops-frost-feature', start: 'top 72%', once: true },
-        });
         gsap.from('.frost-character', {
           autoAlpha: 0,
           x: -54,
