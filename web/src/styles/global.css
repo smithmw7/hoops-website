@@ -453,7 +453,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 34px 34px rgba(0, 3, 14, 0.5)) drop-shadow(0 0 26px rgba(111, 211, 255, 0.2));
-  transform: rotate(-8deg);
+  transform: rotate(-8deg) scale(2);
 }
 .frost-particles { position: absolute; z-index: 1; inset: 8%; pointer-events: none; }
 .frost-particle {
