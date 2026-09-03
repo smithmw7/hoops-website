@@ -421,6 +421,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 .frost-shoe-stage {
   position: relative;
+  top: -150px;
   z-index: 2;
   flex: 0 0 min(40vw, 520px);
   width: min(40vw, 520px);
@@ -626,7 +627,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   }
   .frost-shoe-stage {
     position: absolute;
-    top: 20%;
+    top: calc(20% - 150px);
     right: -1%;
     width: min(68vw, 340px);
     margin: 0;
