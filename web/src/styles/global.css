@@ -138,6 +138,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   min-width: 0;
   display: block;
   text-decoration: none;
+  touch-action: manipulation;
 }
 .hero-icon-shell {
   display: block;
@@ -147,11 +148,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   border-radius: 23%;
   background: #141414;
   box-shadow: 0 26px 70px rgba(0, 0, 0, 0.45);
+  transform-origin: 50% 50%;
+  will-change: transform;
 }
 .hero-icon-shell img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform-origin: 50% 50%;
+  will-change: transform;
 }
 .hero-game-cardkings .hero-icon-shell {
   display: grid;

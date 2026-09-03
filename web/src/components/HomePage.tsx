@@ -188,6 +188,44 @@ export function HomePage() {
           },
         );
 
+        const heroGameCleanups = gsap.utils.toArray<HTMLAnchorElement>('.hero-game').map((gameLink) => {
+          const shell = gameLink.querySelector<HTMLElement>('.hero-icon-shell');
+          const icon = shell?.querySelector<HTMLElement>('img');
+          if (!shell || !icon) return () => undefined;
+
+          const press = () => {
+            gsap.killTweensOf([shell, icon]);
+            gsap.set(shell, { scale: 0.92, y: 4 });
+            gsap.set(icon, { scale: 1.035 });
+          };
+          const release = () => {
+            gsap.to(shell, { scale: 1, y: 0, duration: 0.38, ease: 'back.out(2.2)', overwrite: true });
+            gsap.to(icon, { scale: 1, duration: 0.3, ease: 'power2.out', overwrite: true });
+          };
+          const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Enter' || event.key === ' ') press();
+          };
+          const handleKeyUp = (event: KeyboardEvent) => {
+            if (event.key === 'Enter' || event.key === ' ') release();
+          };
+
+          gameLink.addEventListener('pointerdown', press);
+          gameLink.addEventListener('pointerup', release);
+          gameLink.addEventListener('pointercancel', release);
+          gameLink.addEventListener('pointerleave', release);
+          gameLink.addEventListener('keydown', handleKeyDown);
+          gameLink.addEventListener('keyup', handleKeyUp);
+
+          return () => {
+            gameLink.removeEventListener('pointerdown', press);
+            gameLink.removeEventListener('pointerup', release);
+            gameLink.removeEventListener('pointercancel', release);
+            gameLink.removeEventListener('pointerleave', release);
+            gameLink.removeEventListener('keydown', handleKeyDown);
+            gameLink.removeEventListener('keyup', handleKeyUp);
+          };
+        });
+
         gsap.utils.toArray<HTMLElement>('.game-chapter-aces, .game-chapter-reword').forEach((section) => {
           const header = section.querySelector('.chapter-header');
           const lines = section.querySelectorAll('.tagline-line');
@@ -364,6 +402,8 @@ export function HomePage() {
           ease: 'power3.out',
           scrollTrigger: { trigger: '.studio-signoff', start: 'top 82%', once: true },
         });
+
+        return () => heroGameCleanups.forEach((cleanup) => cleanup());
       });
     }, pageRef);
 
