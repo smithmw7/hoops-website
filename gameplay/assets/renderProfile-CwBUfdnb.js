@@ -1,0 +1,1 @@
+function e(){let e=window.matchMedia?.(`(pointer: coarse)`).matches??!1,t=navigator.maxTouchPoints>0,n=Math.min(window.innerWidth,window.innerHeight),r=(e||t)&&n<=820;return{constrainedMobile:r,maxPixelRatio:r?1:1.75,dynamicShadows:!r,shadowMapSize:r?512:2048,shadowMapType:r?0:2}}export{e as t};
