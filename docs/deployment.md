@@ -15,11 +15,15 @@ Do not remove or change the custom domain. `CNAME` is included in every build ar
 
 ## Normal release flow
 
-1. Run `npm ci`.
-2. Run `npm run check` and `npm run build`.
-3. Preview `dist/` with `npm run preview` and verify the required routes.
-4. Merge the approved change to `main`.
-5. Confirm the GitHub Pages workflow succeeds and check the live custom domain.
+1. When publishing Gameplay, run `npm run export:hightop` from its repository.
+   The command builds with `/gameplay/` as the public base and replaces only
+   this checkout's committed `gameplay/` copy.
+2. Run `npm ci`.
+3. Run `npm run check` and `npm run build`.
+4. Preview `dist/` with `npm run preview` and verify the required routes,
+   including `/gameplay/` when its copy changed.
+5. Merge the approved change to `main`.
+6. Confirm the GitHub Pages workflow succeeds and check the live custom domain.
 
 ## Rollback
 
