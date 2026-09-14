@@ -26,6 +26,11 @@ checkout's `gameplay/` directory. From that repository, run
 `npm run export:hightop`; this site's normal build then preserves the copy at
 `https://hightopgames.com/gameplay/` without merging either source tree.
 
+The separate Puzzlegum repository does the same for `puzzlegum/`: run
+`pnpm export:hightop` there, then `pnpm verify:hightop` to prove this site still
+builds and every route still serves. The copy is preserved at
+`https://hightopgames.com/puzzlegum/`.
+
 Motion is deliberately separate from the static design layer. Once the visual system is approved, use GSAP for animation where motion materially improves hierarchy, feedback, or storytelling.
 
 See [docs/architecture.md](docs/architecture.md) for the project layout and [docs/deployment.md](docs/deployment.md) before changing GitHub Pages settings or publishing.

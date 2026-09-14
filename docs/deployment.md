@@ -18,12 +18,16 @@ Do not remove or change the custom domain. `CNAME` is included in every build ar
 1. When publishing Gameplay, run `npm run export:hightop` from its repository.
    The command builds with `/gameplay/` as the public base and replaces only
    this checkout's committed `gameplay/` copy.
-2. Run `npm ci`.
-3. Run `npm run check` and `npm run build`.
-4. Preview `dist/` with `npm run preview` and verify the required routes,
-   including `/gameplay/` when its copy changed.
-5. Merge the approved change to `main`.
-6. Confirm the GitHub Pages workflow succeeds and check the live custom domain.
+2. When publishing Puzzlegum, run `pnpm export:hightop` from its repository.
+   It builds with `/puzzlegum/` as the public base and replaces only this
+   checkout's committed `puzzlegum/` copy. `pnpm verify:hightop` then builds
+   this site and checks every existing route plus `/puzzlegum/`.
+3. Run `npm ci`.
+4. Run `npm run check` and `npm run build`.
+5. Preview `dist/` with `npm run preview` and verify the required routes,
+   including `/gameplay/` and `/puzzlegum/` when their copies changed.
+6. Merge the approved change to `main`.
+7. Confirm the GitHub Pages workflow succeeds and check the live custom domain.
 
 ## Rollback
 
