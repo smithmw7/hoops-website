@@ -4,10 +4,12 @@ import { GamePage } from './components/GamePage';
 import { HomePage } from './components/HomePage';
 import { Layout } from './components/Layout';
 import { SupportPage } from './components/SupportPage';
+import { ColorRiseSection } from './components/ColorRiseSection';
 
 const route = window.location.pathname.replace(/^\/+|\/+$/g, '');
 
 const pageMeta: Record<string, { title: string; description: string }> = {
+  colorrise: { title: 'Color Rise | Hightop Games', description: 'Color Rise. Find your flow in color.' },
   '': { title: 'Hightop Games — Games worth one more turn.', description: 'Hightop Games is an independent studio making bold, replayable games for mobile and the web.' },
   support: { title: 'Player Support — Hightop Games', description: 'Get help with a Hightop Games title or share feedback with the studio.' },
 };
@@ -25,6 +27,7 @@ export default function App() {
   }, [meta.description, meta.title]);
 
   if (route === '') return <HomePage />;
+  if (route === 'colorrise') return <Layout><ColorRiseSection standalone /></Layout>;
   if (route === 'support') return <SupportPage />;
   if (game) return <GamePage game={game} />;
 

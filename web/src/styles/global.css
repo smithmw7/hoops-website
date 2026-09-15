@@ -253,6 +253,66 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .phone-shot img { width: 100%; height: 100%; object-fit: cover; }
 .game-chapter-reword .phone-shot { box-shadow: 0 30px 70px rgba(33, 65, 132, 0.18); }
 
+/* Color Rise uses the same chapter width and portrait media as the store games. */
+.game-chapter-colorrise {
+  color: #fffaf5;
+  background:
+    radial-gradient(ellipse at 24% 12%, rgba(133, 68, 214, 0.12), transparent 42%),
+    radial-gradient(ellipse at 70% 0%, rgba(247, 153, 70, 0.08), transparent 40%),
+    #191a1e;
+}
+.colorrise-header { display: flex; align-items: center; gap: clamp(32px, 5vw, 80px); margin-bottom: clamp(44px, 5vw, 72px); }
+.colorrise-icon {
+  width: clamp(160px, 21vw, 300px);
+  flex: 0 0 auto;
+  border-radius: 23%;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3), 0 0 80px rgba(176, 92, 234, 0.13);
+}
+.colorrise-header h1, .colorrise-header h2 {
+  margin: 0;
+  font-size: clamp(3.5rem, 8.5vw, 8rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.065em;
+  text-shadow: 0 0 30px rgba(255, 185, 108, 0.32), 0 0 80px rgba(189, 118, 248, 0.35);
+}
+.colorrise-header a { text-decoration: none; }
+.colorrise-gallery-controls { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 18px; }
+.colorrise-gallery-controls button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+.colorrise-gallery-controls button:hover { background: rgba(255, 255, 255, 0.12); }
+.phone-gallery.colorrise-gallery {
+  --gallery-gap: clamp(12px, 2vw, 28px);
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 3 * var(--gallery-gap)) / 4);
+  gap: var(--gallery-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #77707e transparent;
+  margin: 0;
+  padding: 0 0 22px;
+}
+.colorrise-gallery:focus-visible { outline: 3px solid #bd8af5; outline-offset: 6px; }
+.colorrise-gallery .phone-shot { aspect-ratio: 1320 / 2868; scroll-snap-align: start; background: #191a1e; box-shadow: none; border: 1px solid rgba(255, 255, 255, 0.08); }
+.colorrise-gallery .phone-shot img, .colorrise-gallery video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.colorrise-standalone .chapter-shell { padding-top: clamp(150px, 14vw, 210px); }
+@media (max-width: 760px) {
+  .colorrise-header { flex-direction: column; align-items: flex-start; gap: 32px; margin-bottom: 36px; }
+  .colorrise-icon { width: clamp(148px, 44vw, 220px); }
+  .colorrise-header h1, .colorrise-header h2 { font-size: clamp(3.5rem, 13vw, 6rem); }
+  .phone-gallery.colorrise-gallery { grid-auto-columns: 76%; }
+}
+
 /* Card Kings */
 .game-chapter-cardkings { background: #18131f; color: white; }
 .card-kings-kingdom {

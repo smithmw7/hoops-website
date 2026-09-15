@@ -27,6 +27,7 @@ const files = [
 ];
 
 const routes = [
+  ['colorrise', 'Color Rise | Hightop Games', 'Color Rise. Find your flow in color.'],
   ['reword', 'Daily Reword — Hightop Games', 'A calm daily word ritual. Start with one word, use your rack to make the next, and clear every letter to win.'],
   ['aces', 'Aces — Hightop Games', 'A smart card merge puzzle where every move matters. Place cards, trigger combos, and collect all four Aces.'],
   ['cardkings', 'Card Kings — Hightop Games', 'A royal puzzle adventure where every card merge helps rebuild the kingdom.'],

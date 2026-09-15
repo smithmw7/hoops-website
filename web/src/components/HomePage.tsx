@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { games, type Game } from '../data/games';
 import { Layout } from './Layout';
+import { ColorRiseSection } from './ColorRiseSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -446,6 +447,7 @@ export function HomePage() {
         <div id="games">
           <StoreGameSection game={aces} />
           <StoreGameSection game={reword} />
+          <ColorRiseSection />
           <CardKingsSection game={cardKings} />
           <PreviewGameSection game={hoops} />
           <FrostFeatureSection />
