@@ -47,7 +47,7 @@ export function Layout({ children, tone = 'dark', showBrand = true }: LayoutProp
         </div>
         <div className="site-shell footer-bottom">
           <p>© {new Date().getFullYear()} Hightop Games LLC</p>
-          <div><a href="/aces/privacy.html">Privacy</a><a href="/aces/terms.html">Terms</a></div>
+          <div><a href="/privacy.html">Privacy</a><a href="/aces/terms.html">Terms</a></div>
         </div>
       </footer>
     </>

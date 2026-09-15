@@ -20,6 +20,8 @@ const files = [
   ['CNAME', 'CNAME'],
   ['app-ads.txt', 'app-ads.txt'],
   ['robots.txt', 'robots.txt'],
+  ['privacy.html', 'privacy.html'],
+  ['support.html', 'support.html'],
   ['aces/privacy.html', 'aces/privacy.html'],
   ['aces/terms.html', 'aces/terms.html'],
   ['reword/privacy.html', 'reword/privacy.html'],

@@ -253,7 +253,7 @@
     <section class="support-card">
       <p class="eyebrow">Player Support</p>
       <h1>We'd love to hear from you.</h1>
-      <p class="intro">We care about making our games feel fair, fun. We're here to help with any issues, questions, or suggestions.</p>
+      <p class="intro">We care about making our games feel fair and fun. We're here to help with issues, questions, and suggestions.</p>
 
       <p class="contact-note">You can always reach us directly at <a href="mailto:support@hightopgames.com">support@hightopgames.com</a>. This form sends your request to our support inbox and confirms your ticket number on this page.</p>
 
@@ -261,12 +261,7 @@
         <div class="field-grid">
           <label>
             Game
-            <select id="game" name="game" required>
-              <option value="Aces">Aces</option>
-              <option value="Daily Reword">Daily Reword</option>
-              <option value="Corgi Cafe">Corgi Cafe</option>
-              <option value="Other Hightop Games title">Other Hightop Games title</option>
-            </select>
+            <input id="game" name="game" type="text" maxlength="80" placeholder="Game or service name" required>
           </label>
 
           <label>
@@ -321,8 +316,7 @@
 
     <p class="site-links">
       <a href="index.html">Games</a> &middot;
-      <a href="aces/privacy.html">Privacy Policy</a> &middot;
-      <a href="aces/terms.html">Terms of Service</a>
+      <a href="privacy.html">Privacy Policy</a>
     </p>
   </main>
 
@@ -345,11 +339,7 @@
 
       const gameFromUrl = (params.get('game') || '').trim();
       if (gameFromUrl) {
-        const gameSelect = document.getElementById('game');
-        const match = Array.from(gameSelect.options).find(
-          (option) => option.value.toLowerCase() === gameFromUrl.toLowerCase()
-        );
-        if (match) gameSelect.value = match.value;
+        document.getElementById('game').value = gameFromUrl.slice(0, 80);
       }
     })();
 
