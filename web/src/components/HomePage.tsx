@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { games, type Game } from '../data/games';
 import { Layout } from './Layout';
 import { ColorRiseSection } from './ColorRiseSection';
+import { StoreGameHeader } from './StoreGameHeader';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,14 +12,6 @@ function taglineLines(text: string) {
   return text.split(/(?<=\.)\s+/).map((line) => (
     <span className="tagline-line" key={line}>{line}</span>
   ));
-}
-
-function AppStoreBadge({ href, game }: { href: string; game: string }) {
-  return (
-    <a className="app-store-link" href={href} target="_blank" rel="noopener" aria-label={`Download ${game} on the App Store`}>
-      <img src="/assets/images/app-store-badge.svg" alt="Download on the App Store" />
-    </a>
-  );
 }
 
 function PhoneGallery({ game }: { game: Game }) {
@@ -39,18 +32,9 @@ function StoreGameSection({ game }: { game: Game }) {
   const appStore = [game.primaryCta, game.secondaryCta].find((cta) => cta?.href.includes('apps.apple.com'))?.href;
 
   return (
-    <section className={`game-chapter game-chapter-${game.slug}`} id={game.slug}>
+    <section className={`game-chapter game-chapter-${game.slug}`} id={game.slug} aria-labelledby={`${game.slug}-title`}>
       <div className="chapter-shell">
-        <header className="chapter-header">
-          <div className="chapter-title-row">
-            <img className="chapter-icon" src={game.icon} alt="" width="1024" height="1024" />
-            <div>
-              <p className="chapter-kicker">{game.status}</p>
-              <h2>{game.name}</h2>
-            </div>
-          </div>
-          {appStore && <AppStoreBadge href={appStore} game={game.name} />}
-        </header>
+        <StoreGameHeader name={game.name} icon={game.icon} titleId={`${game.slug}-title`} appStoreUrl={appStore} />
         <div className="chapter-statement">
           <h3>{taglineLines(game.tagline)}</h3>
           <p>{game.description}</p>

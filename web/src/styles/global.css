@@ -208,20 +208,31 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .game-chapter-reword > *,
 .preview-game > * { position: relative; z-index: 1; }
 .chapter-shell { width: min(calc(100% - 64px), var(--site-width)); margin-inline: auto; padding-block: clamp(90px, 10vw, 150px); }
-.chapter-header { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-.chapter-title-row { display: flex; align-items: center; gap: 22px; }
-.chapter-icon {
-  width: clamp(72px, 7vw, 104px);
-  height: auto;
-  flex: 0 0 auto;
-  aspect-ratio: 1;
-  border-radius: 22%;
-  object-fit: cover;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+.chapter-header {
+  display: grid;
+  grid-template-columns: clamp(160px, 21vw, 300px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 80px);
 }
-.chapter-title-row h2 { margin: 3px 0 0; font-size: clamp(2rem, 3.4vw, 3.8rem); font-weight: 600; letter-spacing: -0.055em; line-height: 1; }
+.chapter-icon {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 23%;
+  object-fit: cover;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+}
+.chapter-heading { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: start; gap: clamp(16px, 2vw, 28px); }
+.chapter-name {
+  margin: 0;
+  font-size: clamp(3.5rem, 8.5vw, 8rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.065em;
+}
+.chapter-name a { text-decoration: none; }
 .chapter-kicker { opacity: 0.62; }
-.app-store-link { display: inline-block; width: 176px; flex: 0 0 auto; }
+.app-store-link { display: block; width: 176px; max-width: 100%; }
 .app-store-link img { width: 100%; height: auto; }
 .chapter-statement { margin-block: clamp(90px, 11vw, 170px) clamp(70px, 8vw, 120px); }
 .chapter-statement h3 {
@@ -270,22 +281,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     radial-gradient(ellipse at 70% 0%, rgba(247, 153, 70, 0.08), transparent 40%),
     #191a1e;
 }
-.colorrise-header { display: flex; align-items: center; gap: clamp(32px, 5vw, 80px); margin-bottom: clamp(44px, 5vw, 72px); }
-.colorrise-icon {
-  width: clamp(160px, 21vw, 300px);
-  flex: 0 0 auto;
-  border-radius: 23%;
+.game-chapter-colorrise .chapter-header { margin-bottom: clamp(44px, 5vw, 72px); }
+.game-chapter-colorrise .chapter-icon {
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3), 0 0 80px rgba(176, 92, 234, 0.13);
 }
-.colorrise-header h1, .colorrise-header h2 {
-  margin: 0;
-  font-size: clamp(3.5rem, 8.5vw, 8rem);
-  font-weight: 600;
-  line-height: 1.06;
-  letter-spacing: -0.065em;
+.game-chapter-colorrise .chapter-name {
   text-shadow: 0 0 30px rgba(255, 185, 108, 0.32), 0 0 80px rgba(189, 118, 248, 0.35);
 }
-.colorrise-header a { text-decoration: none; }
 .phone-gallery.colorrise-gallery {
   --gallery-gap: clamp(12px, 2vw, 28px);
   grid-template-columns: none;
@@ -302,9 +304,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .colorrise-gallery .phone-shot img, .colorrise-gallery video { display: block; width: 100%; height: 100%; object-fit: contain; }
 .colorrise-standalone .chapter-shell { padding-top: clamp(150px, 14vw, 210px); }
 @media (max-width: 760px) {
-  .colorrise-header { flex-direction: column; align-items: flex-start; gap: 32px; margin-bottom: 36px; }
-  .colorrise-icon { width: clamp(148px, 44vw, 220px); }
-  .colorrise-header h1, .colorrise-header h2 { font-size: clamp(3.5rem, 13vw, 6rem); }
+  .chapter-header { grid-template-columns: clamp(132px, 32vw, 220px) minmax(0, 1fr); gap: clamp(16px, 4vw, 32px); }
+  .chapter-name { font-size: clamp(2rem, 8.5vw, 4rem); }
+  .game-chapter-colorrise .chapter-header { margin-bottom: 36px; }
   .phone-gallery.colorrise-gallery { grid-auto-columns: 76%; }
 }
 
@@ -643,10 +645,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   }
   .hero-games { width: min(100%, 480px); margin-inline: auto; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
   .chapter-shell { padding-block: 76px; }
-  .chapter-header { align-items: flex-start; flex-direction: column; }
-  .chapter-title-row { gap: 16px; }
-  .chapter-icon { width: 72px; }
-  .app-store-link { width: 154px; }
   .chapter-statement { margin-block: 74px 60px; }
   .chapter-statement h3 { font-size: clamp(2.25rem, 9.2vw, 3.4rem); }
   .chapter-statement > p { margin-top: 28px; font-size: 1.1rem; }
