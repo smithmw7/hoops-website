@@ -130,7 +130,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 .hero-games {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   align-items: end;
   gap: clamp(18px, 3vw, 48px);
 }
@@ -638,8 +638,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .hero-brand-lockup { top: 35%; width: min(70vw, 300px); }
   .hero-games { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px 10px; }
   .hero-game { grid-column: span 2; }
-  .hero-game:nth-child(4) { grid-column: 2 / span 2; }
-  .hero-game:nth-child(5) { grid-column: 4 / span 2; }
   .chapter-shell { padding-block: 76px; }
   .chapter-header { align-items: flex-start; flex-direction: column; }
   .chapter-title-row { gap: 16px; }

@@ -22,6 +22,7 @@ const files = [
   ['robots.txt', 'robots.txt'],
   ['privacy.html', 'privacy.html'],
   ['support.html', 'support.html'],
+  ['colorrise/terms.html', 'colorrise/terms.html'],
   ['aces/privacy.html', 'aces/privacy.html'],
   ['aces/terms.html', 'aces/terms.html'],
   ['reword/privacy.html', 'reword/privacy.html'],

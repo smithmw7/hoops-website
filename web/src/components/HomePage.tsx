@@ -156,7 +156,8 @@ export function HomePage() {
   const cardKings = games.find((game) => game.slug === 'cardkings')!;
   const hoops = games.find((game) => game.slug === 'hoops')!;
   const corgiCafe = games.find((game) => game.slug === 'corgicafe')!;
-  const featuredGames = [aces, reword, cardKings, hoops, corgiCafe];
+  const colorRise = { slug: 'colorrise', name: 'Color Rise', icon: '/assets/images/colorrise/app-icon.webp' };
+  const featuredGames = [aces, reword, colorRise, cardKings, hoops, corgiCafe];
 
   useLayoutEffect(() => {
     if (!pageRef.current) return;
