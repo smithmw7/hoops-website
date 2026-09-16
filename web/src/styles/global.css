@@ -89,7 +89,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 /* Home hero */
 .home-hero {
   position: relative;
-  min-height: min(960px, 100svh);
+  min-height: clamp(760px, 100svh, 960px);
   display: flex;
   align-items: flex-end;
   overflow-x: clip;
@@ -248,7 +248,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   text-decoration: none;
   font-weight: 700;
 }
-.phone-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 2vw, 28px); }
+.phone-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 28px);
+  padding-bottom: 22px;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #77707e transparent;
+}
+.phone-gallery:focus-visible { outline: 3px solid currentColor; outline-offset: 6px; }
 .phone-shot { aspect-ratio: 600 / 1299; margin: 0; overflow: hidden; border-radius: clamp(18px, 2.2vw, 34px); box-shadow: 0 30px 70px rgba(0, 0, 0, 0.22); }
 .phone-shot img { width: 100%; height: 100%; object-fit: cover; }
 .game-chapter-reword .phone-shot { box-shadow: 0 30px 70px rgba(33, 65, 132, 0.18); }
@@ -277,17 +286,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   text-shadow: 0 0 30px rgba(255, 185, 108, 0.32), 0 0 80px rgba(189, 118, 248, 0.35);
 }
 .colorrise-header a { text-decoration: none; }
-.colorrise-gallery-controls { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 18px; }
-.colorrise-gallery-controls button {
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  color: inherit;
-  background: rgba(255, 255, 255, 0.04);
-  cursor: pointer;
-}
-.colorrise-gallery-controls button:hover { background: rgba(255, 255, 255, 0.12); }
 .phone-gallery.colorrise-gallery {
   --gallery-gap: clamp(12px, 2vw, 28px);
   grid-template-columns: none;
@@ -295,10 +293,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   grid-auto-columns: calc((100% - 3 * var(--gallery-gap)) / 4);
   gap: var(--gallery-gap);
   overflow-x: auto;
-  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: #77707e transparent;
   margin: 0;
   padding: 0 0 22px;
 }
@@ -635,10 +630,18 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   }
   [data-menu-open="true"] .site-nav { display: flex; }
   .site-nav a { padding: 14px 12px; }
-  .home-hero { min-height: 760px; padding: 130px 16px 58px; }
-  .hero-brand-lockup { top: 35%; width: min(70vw, 300px); }
-  .hero-games { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px 10px; }
-  .hero-game { grid-column: span 2; }
+  .home-hero { min-height: auto; padding: 130px 16px 58px; }
+  .hero-content { display: grid; gap: clamp(40px, 8vw, 56px); }
+  .hero-brand-lockup {
+    position: relative;
+    isolation: isolate;
+    top: auto;
+    left: auto;
+    width: min(70vw, 300px);
+    margin-inline: auto;
+    transform: none;
+  }
+  .hero-games { width: min(100%, 480px); margin-inline: auto; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
   .chapter-shell { padding-block: 76px; }
   .chapter-header { align-items: flex-start; flex-direction: column; }
   .chapter-title-row { gap: 16px; }

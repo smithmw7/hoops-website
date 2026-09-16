@@ -25,7 +25,7 @@ function PhoneGallery({ game }: { game: Game }) {
   if (!game.screenshots?.length) return null;
 
   return (
-    <div className="phone-gallery" aria-label={`${game.name} screenshots`}>
+    <div className="phone-gallery" role="region" aria-label={`${game.name} screenshots`} tabIndex={0}>
       {game.screenshots.map((src, index) => (
         <figure className="phone-shot" key={src}>
           <img src={src} alt={`${game.name} gameplay screenshot ${index + 1}`} loading={index > 1 ? 'lazy' : 'eager'} />
