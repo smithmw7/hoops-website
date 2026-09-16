@@ -446,7 +446,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   min-height: min(900px, 100svh);
   display: grid;
   place-items: center;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   isolation: isolate;
   background:
     radial-gradient(circle at 77% 52%, rgba(95, 211, 255, 0.2) 0%, rgba(55, 124, 202, 0.1) 25%, transparent 52%),
