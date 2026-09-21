@@ -1,0 +1,40 @@
+/* Live Montserrat type, matched to the text layers in the supplied Logo.psd. */
+.color-rise-logo {
+  --logo-size: 96px;
+  position: relative;
+  display: block;
+  width: 2.6943em;
+  height: 1.371em;
+  max-width: 100%;
+  color: #f0eee7;
+  font-family: "Montserrat";
+  font-size: var(--logo-size);
+  font-style: normal;
+  font-synthesis: none;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.color-rise-logo__color {
+  position: absolute;
+  top: -.153em;
+  left: 0;
+  width: 100%;
+  font-size: .72642em;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.color-rise-logo__rise {
+  position: absolute;
+  top: .4974em;
+  left: .035em;
+  width: 100%;
+  display: block;
+  padding: 0;
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: .1em;
+  line-height: 1;
+}

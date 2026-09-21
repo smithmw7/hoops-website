@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#191a1e" />
+  <meta name="description" content="A tactile color gradient puzzle." />
+  <title>Color Rise</title>
+  <link rel="icon" href="avatars/default-profile.svg" type="image/svg+xml" />
+  <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="wordmark.css" />
+  <link rel="stylesheet" href="profile.css" />
+  <link rel="stylesheet" href="ftue.css" />
+</head>
+<body>
+  <main class="game-shell" aria-label="Color gradient puzzle">
+    <section id="splash" class="splash splash-pending" aria-label="Welcome to Color Rise">
+      <div class="splash-center">
+        <div class="color-rise-logo" role="img" aria-label="Color Rise">
+          <span class="color-rise-logo__color" aria-hidden="true">COLOR</span>
+          <span class="color-rise-logo__rise" aria-hidden="true">RISE</span>
+        </div>
+      </div>
+      <button id="splashPlay" class="result-button splash-play" type="button" aria-label="Play">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 5 7 7-7 7"/></svg>
+      </button>
+    </section>
+    <section id="menu" class="menu" aria-label="Chapters" aria-hidden="true" inert>
+      <div class="menu-top">
+        <button id="profileOpen" class="icon-button profile-open" aria-label="Open player profile" aria-haspopup="dialog" aria-expanded="false"><img data-player-avatar src="avatars/default-profile.svg" alt="" draggable="false"></button>
+        <div class="app-name color-rise-logo" role="img" aria-label="Color Rise">
+          <span class="color-rise-logo__color" aria-hidden="true">COLOR</span>
+          <span class="color-rise-logo__rise" aria-hidden="true">RISE</span>
+        </div>
+        <button id="menuSettings" class="icon-button settings-open" aria-label="Open settings" aria-haspopup="dialog" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h14M5 15h14"/></svg></button>
+      </div>
+      <div class="chapter-top" hidden>
+        <button id="chaptersBack" class="icon-button" aria-label="Back to chapters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button>
+        <h1 id="chapterTitle"></h1>
+        <span id="chapterCounter" class="chapter-counter"></span>
+      </div>
+      <div id="chapterStatus" class="chapter-status" hidden><div class="chapter-meter" role="progressbar" aria-label="Chapter completion" aria-valuemin="0" aria-valuemax="20"><span></span></div><p id="chapterHint" hidden></p></div>
+      <div id="puzzleGrid" class="puzzle-grid"></div>
+    </section>
+
+    <section id="game" class="game-view" aria-hidden="true" inert>
+    <header class="gameplay-hud">
+      <div class="gameplay-identity">
+        <h1 id="gameChapterTitle" class="game-chapter-title">Sunrise</h1>
+        <p class="level" id="level">Level 1</p>
+      </div>
+      <button id="settingsOpen" class="icon-button settings-open" aria-label="Open level menu" aria-haspopup="dialog" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h14M5 15h14"/></svg></button>
+    </header>
+
+    <section class="play-area">
+      <div id="cheatGuide" class="cheat-guide" hidden>
+        <button id="cheatDetails" class="cheat-guide-copy" aria-label="Open solution details" aria-describedby="cheatRemaining cheatInstruction"><small id="cheatRemaining">CHEAT</small><span id="cheatInstruction">Finding a shortest route…</span></button>
+        <button id="cheatOff" class="cheat-off" aria-label="Turn off cheat mode">×</button>
+      </div>
+      <div class="board" id="board" role="list" aria-label="Gradient pieces"></div>
+      <div class="meter" aria-hidden="true" hidden><div id="progress"></div></div>
+      <div id="count" class="count" hidden>0/5</div>
+    </section>
+
+    <div class="game-footer">
+    </div>
+
+    <div id="result" class="result" role="dialog" aria-modal="true" aria-labelledby="resultTitle" aria-hidden="true">
+      <div class="result-card">
+        <h2 id="resultTitle" class="visually-hidden">Level complete</h2>
+        <div class="result-celebration">
+          <div id="resultLevelIdentity" class="result-level-identity">
+            <span id="resultChapterName" class="result-chapter-name">SUNRISE</span>
+            <span id="resultLevelName" class="result-level-name">LEVEL 1</span>
+          </div>
+          <svg class="result-mark" viewBox="0 0 120 120" aria-hidden="true">
+            <g id="resultEmblem">
+              <g id="resultLayers"></g>
+              <circle id="resultShape" class="result-circle result-core" cx="60" cy="60" r="34"/>
+              <path id="resultIcon" d="m42 61 12 12 25-28"/>
+            </g>
+          </svg>
+          <div id="resultStars" class="result-stars" role="img" aria-label="Puzzle rating"></div>
+          <p id="firstTryCallout" class="first-try-callout" role="status" aria-live="polite" hidden>
+            <img class="badge-image" src="images/badge.png" alt="" width="350" height="375" draggable="false">
+            <span id="firstTryMessage"></span>
+          </p>
+        </div>
+        <div class="result-controls">
+        <div id="puzzleStats" class="puzzle-stats" aria-label="Level statistics" hidden><span id="bestStat" hidden></span><span id="triesStat" hidden></span></div>
+        <div class="result-actions">
+          <button id="resultHome" class="result-action" aria-label="Menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>
+          </button>
+          <button id="resultReplay" class="result-action" aria-label="Replay level">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.8 7.3A8 8 0 1 1 4 12M4 4v4h4"/></svg>
+          </button>
+          <button id="resultShare" class="result-action" aria-label="Share result">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m-4 4 4-4 4 4M7 10H5v11h14V10h-2"/></svg>
+          </button>
+          <div id="lossTries" class="loss-tries" role="status" aria-live="polite" hidden><span id="lossTriesCount">0</span></div>
+        </div>
+        <button id="resultButton" class="result-button" aria-label="Next level">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 5 7 7-7 7"/></svg>
+        </button>
+        <p id="shareStatus" class="share-status" role="status"></p>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <aside id="lab" class="lab" role="dialog" aria-modal="true" aria-label="Debug menu" aria-hidden="true">
+      <div class="lab-head">
+        <div><strong>DEBUG MENU</strong><span id="tierLabel">CORE</span></div>
+        <button id="labClose" class="lab-close" aria-label="Close">×</button>
+      </div>
+      <div class="presets" id="presets">
+        <button data-preset="gentle">GENTLE</button><button class="active" data-preset="core">CORE</button>
+        <button data-preset="expert">EXPERT</button><button data-preset="limit">LIMIT</button>
+      </div>
+      <div id="labPreview" class="lab-preview"></div>
+      <div class="lab-scroll">
+        <section class="debug-tools ftue-tools" aria-labelledby="ftueTitle">
+          <h3 id="ftueTitle">FTUE</h3>
+          <button id="resetFTUE" class="debug-button" aria-describedby="ftueHelp">Reset to first launch</button>
+          <p id="ftueHelp">Clears all local player progress, profile, and settings. Starts level 1 immediately.</p>
+          <p id="ftueResetStatus" role="status" hidden></p>
+        </section>
+        <section class="debug-tools" aria-label="Level tools">
+          <button id="unlockAllToggle" class="settings-toggle" type="button" role="switch" aria-checked="true" aria-describedby="unlockAllToggleHelp">
+            <span>Unlock All</span><span class="switch-track" aria-hidden="true"><span></span></span>
+          </button>
+          <p id="unlockAllToggleHelp">Unlock every chapter and level without completing them. On every launch.</p>
+          <button id="progressToggle" class="settings-toggle" type="button" role="switch" aria-checked="false" aria-describedby="progressToggleHelp">
+            <span>Progress meter &amp; steps</span><span class="switch-track" aria-hidden="true"><span></span></span>
+          </button>
+          <p id="progressToggleHelp">Show for this session. Off on every launch.</p>
+          <div class="debug-actions">
+            <button id="restart" class="debug-button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.8 7.3A8 8 0 1 1 4 12M4 4v4h4"/></svg>
+              Restart level
+            </button>
+            <button id="hint" class="debug-button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M8.5 15.5C7 14.4 6 12.7 6 10.7A6 6 0 0 1 18 11c0 1.9-.9 3.5-2.5 4.6-.5.4-.8.9-.8 1.4H9.3c0-.6-.3-1.1-.8-1.5Z"/></svg>
+              Hint
+            </button>
+            <button id="cheatToggle" class="debug-button cheat-toggle" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h5v5H5zM14 14h5v5h-5zM15 5h4v4M6 15v4h4M10 7h5M7 10v5m3 2h4M17 9v5"/></svg>
+              <span id="cheatToggleLabel">Cheat · shortest solution</span>
+            </button>
+          </div>
+          <p id="debugHelp">Open a level to use these tools.</p>
+        </section>
+        <section id="cheatPanel" class="cheat-panel" aria-label="Solution analysis" hidden>
+          <div class="cheat-route-head"><h3 id="cheatRouteTitle">Shortest route</h3><button id="cheatShow" class="debug-button" disabled>Show on board</button></div>
+          <ol id="cheatRoute" class="cheat-route"></ol>
+          <p class="cheat-footnote">Rows are numbered top to bottom after each move. Automatic merges do not add moves.</p>
+          <div class="cheat-summary"><div><span>UNIQUE SOLUTIONS</span><strong id="cheatTotal">…</strong></div><b id="cheatBadge">Counting</b></div>
+          <label><span>Count routes</span><select id="cheatCountMode"><option value="all">No repeated boards</option><option value="merges">Every move merges</option></select></label>
+          <p id="cheatDefinition">From this board. A route cannot revisit a settled board. Drags that produce the same next board count once.</p>
+          <p id="cheatStatus" role="status">Finding a shortest route…</p>
+          <div class="cheat-count-scroll"><table><caption>Solutions by moves from here</caption><thead><tr><th scope="col">Moves</th><th scope="col">Solutions</th></tr></thead><tbody id="cheatCounts"></tbody></table></div>
+          <button id="cheatContinue" class="debug-button" hidden>Keep counting</button>
+        </section>
+        <section class="merge-settings" aria-label="Merge behavior">
+          <label><span>Merge mode</span><select id="mergeModeInput"><option value="cascade">Cascade · top to bottom</option><option value="together">All at once</option></select></label>
+          <label><span>Cascade delay <b id="mergeDelayOut">0 ms</b></span><input id="mergeDelayInput" type="range" min="0" max="1000" step="50" value="0" aria-describedby="mergeDelayHelp"></label>
+          <p id="mergeDelayHelp">Pause after one merge finishes, before the next begins.</p>
+        </section>
+        <section class="merge-settings audio-settings" aria-label="Merge sound">
+          <label><span>Merge pop</span><select id="mergeSoundInput"><option value="pop-01">Pop sound 1 · Default</option><option value="random">Random</option><option value="pop-02">Pop sound 2</option><option value="pop-03">Pop sound 3</option><option value="pop-04">Pop sound 4</option><option value="pop-05">Pop sound 5</option><option value="pop-06">Pop sound 6</option><option value="pop-07">Pop sound 7</option><option value="pop-08">Pop sound 8</option><option value="pop-09">Pop sound 9</option><option value="pop-10">Pop sound 10</option><option value="pop-11">Pop sound 11</option><option value="pop-12">Pop sound 12</option><option value="pop-13">Pop sound 13</option><option value="pop-14">Pop sound 14</option><option value="pop-15">Pop sound 15</option><option value="pop-16">Pop sound 16</option><option value="pop-17">Pop sound 17</option><option value="pop-18">Pop sound 18</option><option value="pop-19">Pop sound 19</option><option value="pop-20">Pop sound 20</option></select></label>
+          <p id="mergeSoundStatus" role="status">Last played: none</p>
+        </section>
+        <label><span>Pieces <b id="piecesOut">7</b></span><input id="piecesInput" type="range" min="5" max="13" value="7"></label>
+        <label><span>Piece height <b id="heightOut">52 px</b></span><input id="heightInput" type="range" min="44" max="68" value="52"></label>
+        <label><span>Hue spacing <b id="hueOut">14°</b></span><input id="hueInput" type="range" min="4" max="28" value="14"></label>
+        <label><span>Value spacing <b id="valueOut">4%</b></span><input id="valueInput" type="range" min="0" max="10" value="4"></label>
+        <label><span>Saturation <b id="satOut">86%</b></span><input id="satInput" type="range" min="20" max="100" value="86"></label>
+        <label><span>Audience mode</span><select id="assistInput"><option value="none">Standard color</option><option value="value">Value ramp</option><option value="pattern">Color + texture</option><option value="mono">Monochrome</option></select></label>
+        <div class="validation" id="validation"></div>
+      </div>
+      <button id="playTest" class="play-test">▶</button>
+    </aside>
+    <dialog id="profile" class="profile-page" aria-labelledby="profileTitle">
+      <div class="profile-header"><button id="profileClose" class="icon-button" aria-label="Back to puzzles"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button><h2 id="profileTitle">PLAYER PROFILE</h2><span aria-hidden="true"></span></div>
+      <div class="profile-scroll">
+        <div class="profile-hero"><img class="profile-portrait" data-player-avatar src="avatars/default-profile.svg" alt="Default profile image" draggable="false"><h3 id="profileAvatarName">Your profile</h3></div>
+        <dl class="profile-stats"><div><dt>Puzzles solved</dt><dd id="profileCompleted">0</dd></div><div><dt>Stars earned</dt><dd id="profileStars">0</dd></div><div><dt>Total tries</dt><dd id="profileTries">0</dd></div></dl>
+        <dl class="profile-perfect-stat">
+          <div class="achievement-block">
+            <dt class="achievement-label">
+              <span class="achievement-icon" aria-hidden="true">
+                <img class="badge-image" src="images/badge.png" alt="" width="350" height="375" draggable="false">
+              </span>
+              <span class="achievement-title">First-try <span>3-star wins</span></span>
+            </dt>
+            <dd id="profileFirstTryPerfect" class="achievement-count">0</dd>
+          </div>
+        </dl>
+        <div id="profileChoices">
+          <div class="profile-photo-actions">
+            <button class="profile-action" data-photo-source="camera"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3v13H4z"/><circle cx="12" cy="13" r="4"/></svg>Camera</button>
+            <button class="profile-action" data-photo-source="photos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.5"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>Upload photo</button>
+          </div>
+          <p class="profile-local-note">Your photo stays on this device.</p>
+        </div>
+        <section id="profileEditor" class="profile-editor" aria-labelledby="profileEditorTitle" hidden>
+          <h3 id="profileEditorTitle">Frame your photo</h3><p>Drag to position. Slide to zoom.</p>
+          <canvas id="profileCrop" width="512" height="512" aria-label="Profile photo crop preview. Drag to adjust the framing."></canvas>
+          <label class="profile-zoom"><span>Zoom</span><input id="profileZoom" type="range" min="1" max="3" step="0.01" value="1"></label>
+          <div class="profile-photo-actions"><button id="profileCancelPhoto" class="profile-action">Cancel</button><button id="profileUsePhoto" class="profile-action profile-save">Use photo</button></div>
+        </section>
+        <p id="profileStatus" class="profile-status" role="status"></p>
+      </div>
+      <input id="profileCameraInput" class="profile-file-input" type="file" accept="image/*" capture="user" hidden>
+      <input id="profileFileInput" class="profile-file-input" type="file" accept="image/*" hidden>
+    </dialog>
+    <dialog id="settings" class="settings-dialog" aria-labelledby="settingsTitle">
+      <div class="settings-panel">
+        <div class="settings-brand"><span class="settings-wordmark">Color Rise</span><button id="settingsClose" class="icon-button" aria-label="Close menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+        <div id="settingsMain" class="settings-main">
+        <div class="settings-heading"><h2 id="settingsTitle">SETTINGS</h2></div>
+        <div class="settings-options">
+          <button id="soundsToggle" class="settings-toggle" role="switch" aria-checked="true"><span>Sounds</span><span class="switch-track" aria-hidden="true"><span></span></span></button>
+          <button id="hapticsToggle" class="settings-toggle" role="switch" aria-checked="true"><span>Haptics</span><span class="switch-track" aria-hidden="true"><span></span></span></button>
+        </div>
+        <div class="settings-actions">
+          <button id="endLevel" class="settings-action" type="button" hidden>End Level</button>
+          <button id="restartLevel" class="settings-action" type="button" hidden>Restart Level</button>
+          <button id="howToPlay" class="settings-action" type="button" aria-controls="settingsHelp">How to Play</button>
+        </div>
+        <a class="settings-support" href="https://hightopgames.com/support.html?game=Color%20Rise" target="_blank" rel="noopener noreferrer"><span>Support &amp; Feedback</span><small>We love to hear from players!</small></a>
+        <footer class="settings-footer">
+          <nav class="settings-legal" aria-label="Legal">
+            <a href="https://hightopgames.com/privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            <a href="https://hightopgames.com/colorrise/terms.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+          </nav>
+          <p class="settings-versions">
+            <span>App Version <strong id="appVersion"></strong></span>
+          </p>
+        </footer>
+        </div>
+        <section id="settingsHelp" class="settings-help" aria-labelledby="settingsHelpTitle" hidden>
+          <h2 id="settingsHelpTitle" tabindex="-1">How to Play</h2>
+          <p>Drag a stack up or down to reorder the colors.</p>
+          <p>Matching neighbors merge into one smooth gradient. Keep going until all the colors join into a single stack.</p>
+          <p>Finish in fewer moves to earn more stars.</p>
+          <button id="howToPlayBack" class="settings-action" type="button">Back to Menu</button>
+        </section>
+      </div>
+      <button id="labOpen" class="settings-debug-link">Debug</button>
+    </dialog>
+  </main>
+  <script src="vendor/capacitor.js"></script>
+  <script src="audio/manifest.js"></script>
+  <script src="native-audio.js"></script>
+  <script src="audio.js"></script>
+  <script type="application/json" data-game-src="vendor/gsap.min.js"></script>
+  <script type="application/json" data-game-src="haptics.js"></script>
+  <script type="application/json" data-game-src="solver-core.js"></script>
+  <script type="application/json" data-game-src="cheat.js"></script>
+  <script type="application/json" data-game-src="drag-layout.js"></script>
+  <script type="application/json" data-game-src="transitions.js"></script>
+  <script type="application/json" data-game-src="profile.js"></script>
+  <script type="application/json" data-game-src="stack-shape.js"></script>
+  <script type="application/json" data-game-src="win-pulse.js"></script>
+  <script type="application/json" data-game-src="campaign.js"></script>
+  <script type="application/json" data-game-src="campaign-records.js"></script>
+  <script type="application/json" data-game-src="ftue.js"></script>
+  <script type="application/json" data-game-src="build-info.js"></script>
+  <script type="application/json" data-game-src="analytics.js"></script>
+  <script type="application/json" data-game-src="vendor/capacitor-share.js"></script>
+  <script type="application/json" data-game-src="vendor/capacitor-haptics.js"></script>
+  <script type="application/json" data-game-src="vendor/capacitor-camera.js"></script>
+  <script type="application/json" data-game-src="game.js"></script>
+  <script src="splash.js"></script>
+</body>
+</html>

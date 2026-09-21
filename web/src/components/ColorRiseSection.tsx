@@ -19,6 +19,7 @@ export function ColorRiseSection({ standalone = false }: { standalone?: boolean 
           titleId="colorrise-title"
           heading={standalone ? 'h1' : 'h2'}
           titleHref="/colorrise/"
+          playUrl="/colorrise/play/"
         />
         <div className="phone-gallery colorrise-gallery" id="colorrise-gallery" role="region" aria-label="Color Rise video and App Store screenshots" tabIndex={0}>
           <figure className="phone-shot">

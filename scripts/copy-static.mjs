@@ -7,6 +7,7 @@ const dist = join(root, 'dist');
 
 const trees = [
   ['assets', 'assets'],
+  ['colorrise/play', 'colorrise/play'],
   ['gameplay', 'gameplay'],
   ['puzzlegum', 'puzzlegum'],
   ['playables', 'playables'],

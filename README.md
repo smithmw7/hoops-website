@@ -26,6 +26,14 @@ checkout's `gameplay/` directory. From that repository, run
 `npm run export:hightop`; this site's normal build then preserves the copy at
 `https://hightopgames.com/gameplay/` without merging either source tree.
 
+Color Rise's release web bundle is preserved in `colorrise/play/` and served at
+`https://hightopgames.com/colorrise/play/`. To refresh it, run
+`COLOR_RISE_BUILD_CONFIGURATION=release npm run build` in the Color Rise source
+repository, then replace `colorrise/play/` with that repository's generated `www/`
+contents. Always use the release configuration so development puzzles and Debug
+controls stay disabled. Build and preview this site to check both Play Now links
+and game startup before publishing.
+
 The separate Puzzlegum repository does the same for `puzzlegum/`: run
 `pnpm export:hightop` there, then `pnpm verify:hightop` to prove this site still
 builds and every route still serves. The copy is preserved at
